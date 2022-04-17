@@ -13,5 +13,20 @@
     <color name="silver_border">#E5E5E5</color>
     <color name="silver_bg_editText">#5CB0BBC1</color>
     <color name="silver_tab_inactive">#B0BBC1</color>
+    <color name="blue_tab_active">#1C8CC9</color>
+
+    <color name="bg_food_icon">#FDD5D7</color>
+    <color name="bg_car_icon">#BDDCFF</color>
+    <color name="bg_shop_icon">#FCEED4</color>
+    <color name="bg_gift_icon">#E6FDD5</color>
+    <color name="bg_book_icon">#D6D6D6</color>
+    <color name="bg_heart_icon">#FC5757</color>
+    <color name="bg_thunder_icon">#FFFDD7</color>
+    <color name="bg_search_icon">#DDD5FD</color>
+
+    <color name="bg_wallet_icon">#BCB7B8</color>
+    <color name="bg_money_icon">#CFFAEA</color>
+    <color name="bg_database_icon">#C8D7D8</color>
+    <color name="bg_coin_icon">#FC7F57</color>
 
 </resources>

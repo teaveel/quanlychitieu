@@ -35,7 +35,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="@color/silver_tab_inactive"
+                    android:backgroundTint="@color/blue_tab_active"
                     android:textColor="@color/white"
                     android:fontFamily="@font/poppins_bold"
                     android:layout_marginEnd="30dp"
@@ -65,6 +65,14 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/poppins_bold"
                 />
+<!--            <DatePicker-->
+<!--                android:id="@+id/datePicker1"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:datePickerMode="calendar"-->
+<!--                android:calendarViewShown="false"-->
+<!--                android:-->
+<!--                />-->
 
         </LinearLayout>
         <LinearLayout
@@ -141,6 +149,15 @@
 <!--                android:fontFamily="@font/poppins_bold"-->
 <!--                android:layout_row="0"-->
 <!--                />-->
+            <Button
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:backgroundTint="@color/blue_tab_active"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins_bold"
+                android:layout_marginEnd="30dp"
+                app:icon="@drawable/icon_food"
+                />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
