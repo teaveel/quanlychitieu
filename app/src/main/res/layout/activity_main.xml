@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="32px"
+    android:layout_marginTop="64px"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/iconStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/icon_start" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iconStart"
+        android:fontFamily="@font/baloo"
+        android:text="Gain total control of your money"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="36dp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Become your own money manager and make every cent count"
+        android:textSize="20dp"
+        android:fontFamily="@font/baloo"
+        android:textColor="@color/silver"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:layout_marginTop="48px"
+        android:layout_below="@id/title"
+        />
+    <Button
+        android:id="@+id/btnToSignIn"
+        android:textAllCaps="false"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:backgroundTint="@color/red"
+        android:fontFamily="@font/baloo"
+        android:text="Sign In"
+        android:textSize="24dp"
+        android:textFontWeight="700"
+        android:textStyle="bold"
+        android:layout_marginBottom="48px"
+        android:layout_marginTop="16px"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/btnToSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_above="@+id/btnToSignIn"
+        android:backgroundTint="@color/theme_purple"
+        android:fontFamily="@font/baloo"
+        android:text="Sign Up"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textFontWeight="700"
+        android:textSize="24dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->
