@@ -13,7 +13,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.*;
 public class SignUpActivity extends AppCompatActivity {
     EditText inputName, inputEmail, inputPass, inputConfirmPass;
-    Button btnSignUp;
+    Button btnSignUp, btnAlreadyAcc;
     FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,17 +24,17 @@ public class SignUpActivity extends AppCompatActivity {
         inputPass = findViewById(R.id.inputPass);
         inputConfirmPass = findViewById(R.id.inputConfirmPass);
         btnSignUp = findViewById(R.id.btnSignUp);
-        TextView txtAlreadyAcc = findViewById(R.id.txtAlreadyAcc);
+        btnAlreadyAcc = findViewById(R.id.alreadyAcc);
 
-        if(firebaseAuth.getCurrentUser() != null)
-        {
-            //da dang nhap
-//            startActivity(new Intent(getApplicationContext()), );
-//            finish();
-        }
+//        if(firebaseAuth.getCurrentUser() != null)
+//        {
+//            //da dang nhap
+////            startActivity(new Intent(getApplicationContext()), );
+////            finish();
+//        }
 
 
-        txtAlreadyAcc.setOnClickListener(new View.OnClickListener() {
+        btnAlreadyAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
