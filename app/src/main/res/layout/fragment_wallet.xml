@@ -25,6 +25,8 @@
             >
             <LinearLayout
                 android:gravity="center"
+                android:layout_gravity="center"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
@@ -129,91 +131,127 @@
                 />
 
         </LinearLayout>
-        <GridLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:background="@drawable/border_black_bg_white"
             android:paddingHorizontal="12dp"
             android:paddingVertical="8dp"
-            android:columnCount="3"
-            android:orientation="horizontal"
-            android:rowCount="5"
+            android:paddingBottom="40dp"
+            android:orientation="vertical"
             >
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Loại"-->
-<!--                android:textSize="28dp"-->
-<!--                android:textColor="@color/black"-->
-<!--                android:fontFamily="@font/poppins_bold"-->
-<!--                android:layout_row="0"-->
-<!--                />-->
-            <Button
+            <TextView
+
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:backgroundTint="@color/blue_tab_active"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Loại"
+                android:textColor="@color/black"
+                android:layout_gravity="top"
+
+                android:textSize="28dp" />
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                android:columnCount="3"
+                android:orientation="horizontal"
+                android:rowCount="3"
+                android:layout_gravity="center"
+
+                >
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:backgroundTint="@color/bg_food_icon"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_marginEnd="30dp"
+                    app:icon="@drawable/icon_food"
+                    />
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:backgroundTint="@color/bg_car_icon"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_marginEnd="30dp"
+                    app:icon="@drawable/icon_car"
+                    />
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:backgroundTint="@color/bg_shop_icon"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_marginEnd="30dp"
+                    app:icon="@drawable/icon_shopbag"
+                    />
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:backgroundTint="@color/bg_gift_icon"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_marginEnd="30dp"
+                    app:icon="@drawable/icon_gift"
+                    />
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:backgroundTint="@color/bg_book_icon"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_marginEnd="30dp"
+                    app:icon="@drawable/icon_book"
+                    />
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:backgroundTint="@color/bg_heart_icon"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_marginEnd="30dp"
+                    app:icon="@drawable/icon_heart"
+                    />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="2"
+                    android:layout_column="0"
+                    android:layout_marginEnd="30dp"
+                    android:backgroundTint="@color/bg_thunder_icon"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/white"
+                    app:icon="@drawable/icon_bill" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_row="3"
+                    android:layout_column="1"
+                    android:layout_marginEnd="30dp"
+                    android:backgroundTint="@color/bg_search_icon"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textColor="@color/white"
+                    app:icon="@drawable/icon_diff" />
+
+            </GridLayout>
+            <Button
+                android:layout_gravity="bottom"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
                 android:textColor="@color/white"
                 android:fontFamily="@font/poppins_bold"
-                android:layout_marginEnd="30dp"
-                app:icon="@drawable/icon_food"
-                />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_food"
-                android:layout_column="0"
-                android:layout_row="1"
-                android:layout_gravity="left|top"
-                />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_car"
-                android:layout_column="1"
-                android:layout_row="1"
-                android:layout_gravity="center"
-                />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_shopbag"
-                android:layout_column="2"
-                android:layout_row="1"
-                android:layout_gravity="right|top"
-                />
+                android:backgroundTint="@color/bg_search_icon"
+                android:layout_marginBottom="100dp"
+                android:text="Xác nhận" />
+        </LinearLayout>
 
-<!--            <Button-->
-<!--                android:id="@+id/button1"-->
-<!--                android:layout_gravity="left|top"-->
-<!--                android:text="qwe" />-->
-<!--            <Button-->
-<!--                android:id="@+id/button4"-->
-<!--                android:layout_column="0"-->
-<!--                android:layout_gravity="left|top"-->
-<!--                android:layout_row="2"-->
-<!--                android:text="qwe" />-->
-<!--            <Button-->
-<!--                android:id="@+id/button5"-->
-<!--                android:layout_width="213dp"-->
-<!--                android:layout_column="1"-->
-<!--                android:layout_columnSpan="2"-->
-<!--                android:layout_gravity="fill_horizontal|fill_vertical"-->
-<!--                android:layout_row="2"-->
-<!--                android:text="qwe" />-->
-<!--            <Button-->
-<!--                android:id="@+id/button2"-->
-<!--                android:layout_column="2"-->
-<!--                android:layout_gravity="left|top"-->
-<!--                android:layout_row="0"-->
-<!--                android:text="haha" />-->
-<!--            <Button-->
-<!--                android:id="@+id/button3"-->
-<!--                android:layout_column="2"-->
-<!--                android:layout_gravity="right|top"-->
-<!--                android:layout_row="0"-->
-<!--                android:text="wer" />-->
-        </GridLayout>
 <!--        <LinearLayout-->
 <!--            android:orientation="vertical"-->
 <!--            android:layout_width="match_parent"-->

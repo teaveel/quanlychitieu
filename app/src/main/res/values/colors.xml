@@ -28,5 +28,7 @@
     <color name="bg_money_icon">#CFFAEA</color>
     <color name="bg_database_icon">#C8D7D8</color>
     <color name="bg_coin_icon">#FC7F57</color>
+    <color name="configrm">#1433FF</color>
+
 
 </resources>
