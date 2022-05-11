@@ -40,8 +40,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:gravity="center"
+            android:gravity="start"
             android:layout_marginBottom="30dp"
+            android:layout_marginStart="10dp"
+
             >
             <ImageView
                 android:layout_width="wrap_content"
@@ -59,7 +61,7 @@
                 android:layout_marginEnd="20dp"
                 />
             <TextView
-                android:layout_gravity="end"
+                android:layout_marginStart="200dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="600$"
@@ -69,26 +71,31 @@
                 android:layout_marginEnd="20dp"
                 />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="start"
             android:layout_marginBottom="30dp"
             android:orientation="vertical"
             >
             <TextView
+                android:layout_gravity="start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Top thu nhập"
                 android:fontFamily="@font/poppins_bold"
                 android:textColor="@color/black"
                 android:textSize="20dp"
+                android:layout_marginStart="30dp"
                 />
             <LinearLayout
+                android:gravity="start"
+                android:layout_gravity="start"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:gravity="center"
                 android:layout_marginBottom="30dp"
+                android:layout_marginStart="10dp"
                 >
                 <ImageView
                     android:layout_width="wrap_content"
@@ -106,7 +113,41 @@
                     android:layout_marginEnd="20dp"
                     />
                 <TextView
-                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="600$"
+                    android:textSize="30dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="200dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="start"
+                android:layout_marginBottom="30dp"
+                android:layout_marginStart="10dp"
+
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_wallet"
+                    android:layout_marginEnd="10dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Ví"
+                    android:textSize="30dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_marginEnd="20dp"
+                    />
+                <TextView
+                    android:layout_marginStart="200dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="600$"
@@ -117,10 +158,12 @@
                     />
             </LinearLayout>
             <LinearLayout
+                android:gravity="start"
+                android:layout_gravity="start"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:gravity="center"
                 android:layout_marginBottom="30dp"
+                android:layout_marginStart="10dp"
                 >
                 <ImageView
                     android:layout_width="wrap_content"
@@ -138,7 +181,6 @@
                     android:layout_marginEnd="20dp"
                     />
                 <TextView
-                    android:layout_gravity="end"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="600$"
@@ -146,61 +188,34 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_bold"
                     android:layout_marginEnd="20dp"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:layout_marginBottom="30dp"
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_wallet"
-                    android:layout_marginEnd="10dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Ví"
-                    android:textSize="30dp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/poppins_bold"
-                    android:layout_marginEnd="20dp"
-                    />
-                <TextView
-                    android:layout_gravity="end"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="600$"
-                    android:textSize="30dp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/poppins_bold"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="200dp"
                     />
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="start"
             android:layout_marginBottom="30dp"
             android:orientation="vertical"
             >
             <TextView
+                android:layout_gravity="start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Top thu nhập"
                 android:fontFamily="@font/poppins_bold"
                 android:textColor="@color/black"
                 android:textSize="20dp"
+                android:layout_marginStart="30dp"
                 />
             <LinearLayout
+                android:gravity="start"
+                android:layout_gravity="start"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:gravity="center"
                 android:layout_marginBottom="30dp"
+                android:layout_marginStart="10dp"
                 >
                 <ImageView
                     android:layout_width="wrap_content"
@@ -218,7 +233,41 @@
                     android:layout_marginEnd="20dp"
                     />
                 <TextView
-                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="600$"
+                    android:textSize="30dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="200dp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="start"
+                android:layout_marginBottom="30dp"
+                android:layout_marginStart="10dp"
+
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_wallet"
+                    android:layout_marginEnd="10dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Ví"
+                    android:textSize="30dp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_bold"
+                    android:layout_marginEnd="20dp"
+                    />
+                <TextView
+                    android:layout_marginStart="200dp"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="600$"
@@ -229,10 +278,12 @@
                     />
             </LinearLayout>
             <LinearLayout
+                android:gravity="start"
+                android:layout_gravity="start"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:gravity="center"
                 android:layout_marginBottom="30dp"
+                android:layout_marginStart="10dp"
                 >
                 <ImageView
                     android:layout_width="wrap_content"
@@ -250,7 +301,6 @@
                     android:layout_marginEnd="20dp"
                     />
                 <TextView
-                    android:layout_gravity="end"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="600$"
@@ -258,38 +308,7 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_bold"
                     android:layout_marginEnd="20dp"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:gravity="center"
-                android:layout_marginBottom="30dp"
-                >
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_wallet"
-                    android:layout_marginEnd="10dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Ví"
-                    android:textSize="30dp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/poppins_bold"
-                    android:layout_marginEnd="20dp"
-                    />
-                <TextView
-                    android:layout_gravity="end"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="600$"
-                    android:textSize="30dp"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/poppins_bold"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginStart="200dp"
                     />
             </LinearLayout>
         </LinearLayout>

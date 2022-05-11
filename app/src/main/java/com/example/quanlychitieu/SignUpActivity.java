@@ -26,12 +26,13 @@ public class SignUpActivity extends AppCompatActivity {
         btnSignUp = findViewById(R.id.btnSignUp);
         btnAlreadyAcc = findViewById(R.id.alreadyAcc);
 
-//        if(firebaseAuth.getCurrentUser() != null)
-//        {
-//            //da dang nhap
-////            startActivity(new Intent(getApplicationContext()), );
-////            finish();
-//        }
+        firebaseAuth = FirebaseAuth.getInstance();
+        if(firebaseAuth.getCurrentUser() != null)
+        {
+            //da dang nhap
+//            startActivity(new Intent(getApplicationContext()), MainActivity.class);
+//            finish();
+        }
 
 
         btnAlreadyAcc.setOnClickListener(new View.OnClickListener() {
@@ -61,12 +62,12 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 if(password.length() < 6)
                 {
-                    inputEmail.setError("Password is required");
+                    inputPass.setError("Password length must be have more 6 characters");
                     return;
                 }
                 if(confirmPassword.length() != password.length())
                 {
-                    inputEmail.setError("Password is not match!");
+                    inputConfirmPass.setError("Password is not match!");
                     return;
                 }
                 firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -74,11 +75,14 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
-                            Toast.makeText(SignUpActivity.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Sign Up Successful", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent();
+                            intent.setClass(SignUpActivity.this, HomeActivity.class);
+                            startActivity(intent);
                         }
                         else
                         {
-                            Toast.makeText(SignUpActivity.this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Sign Up Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
