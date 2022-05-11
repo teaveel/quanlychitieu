@@ -13,7 +13,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.*;
 public class SignUpActivity extends AppCompatActivity {
     EditText inputName, inputEmail, inputPass, inputConfirmPass;
-    Button btnSignUp;
+    Button btnSignUp, btnAlreadyAcc;
     FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,17 +24,18 @@ public class SignUpActivity extends AppCompatActivity {
         inputPass = findViewById(R.id.inputPass);
         inputConfirmPass = findViewById(R.id.inputConfirmPass);
         btnSignUp = findViewById(R.id.btnSignUp);
-        TextView txtAlreadyAcc = findViewById(R.id.txtAlreadyAcc);
+        btnAlreadyAcc = findViewById(R.id.alreadyAcc);
 
+        firebaseAuth = FirebaseAuth.getInstance();
         if(firebaseAuth.getCurrentUser() != null)
         {
             //da dang nhap
-//            startActivity(new Intent(getApplicationContext()), );
+//            startActivity(new Intent(getApplicationContext()), MainActivity.class);
 //            finish();
         }
 
 
-        txtAlreadyAcc.setOnClickListener(new View.OnClickListener() {
+        btnAlreadyAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
@@ -61,12 +62,12 @@ public class SignUpActivity extends AppCompatActivity {
                 }
                 if(password.length() < 6)
                 {
-                    inputEmail.setError("Password is required");
+                    inputPass.setError("Password length must be have more 6 characters");
                     return;
                 }
                 if(confirmPassword.length() != password.length())
                 {
-                    inputEmail.setError("Password is not match!");
+                    inputConfirmPass.setError("Password is not match!");
                     return;
                 }
                 firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -74,11 +75,14 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
-                            Toast.makeText(SignUpActivity.this, "Sign Up Successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Sign Up Successful", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent();
+                            intent.setClass(SignUpActivity.this, HomeActivity.class);
+                            startActivity(intent);
                         }
                         else
                         {
-                            Toast.makeText(SignUpActivity.this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Sign Up Failed", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

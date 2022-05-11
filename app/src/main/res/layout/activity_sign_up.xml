@@ -73,13 +73,13 @@
         android:fontFamily="@font/baloo"
         android:textSize="18dp"
         />
-    <TextView
-        android:id="@+id/txtAlreadyAcc"
+    <Button
+        android:id="@+id/alreadyAcc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Already have an account? Login"
         android:textAlignment="center"
-        android:textColor="@color/silver"
+        android:textColor="@color/black"
         android:fontFamily="@font/baloo"
         android:textSize="18dp"
         android:layout_alignParentBottom="true"
