@@ -7,7 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import androidx.appcompat.widget.AppCompatRadioButton;
+import android.widget.*;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link WalletFragment#newInstance} factory method to
@@ -53,6 +54,7 @@ public class WalletFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -62,4 +64,18 @@ public class WalletFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_wallet, container, false);
     }
 
+
+    private void setChildrenOnClickListener(AppCompatRadioButton child) {
+        GridLayout parent = (GridLayout) child.getParent();
+        final int childCount = parent.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            final View v = parent.getChildAt(i);
+            if (v instanceof AppCompatRadioButton) {
+                if (((RadioButton) v).isChecked()) {
+                    activeRadioButton = (AppCompatRadioButton) v;
+                }
+                v.setOnClickListener(this);
+            }
+        }
+    }
 }
