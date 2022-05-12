@@ -5,6 +5,8 @@ plugins {
 
 android {
     compileSdk 31
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
 
     defaultConfig {
         applicationId "com.example.quanlychitieu"
@@ -14,6 +16,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -43,8 +46,10 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.navigation:navigation-fragment:2.3.5'
     implementation 'androidx.navigation:navigation-ui:2.3.5'
-
+    implementation 'com.android.support:multidex:2.0.1'
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
+    implementation 'com.google.firebase:firebase-storage:20.0.1'
+    implementation 'com.google.firebase:firebase-firestore:24.0.2'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
