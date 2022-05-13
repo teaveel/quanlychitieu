@@ -107,7 +107,7 @@ public class ProfileFragment extends Fragment {
                             if(user.getEmail() == "")
                             {
                                 txtUsername.setText(user.getUsername());
-                                txtUsername.setText(user.getUsername());
+                                numberWallet.setText(""+user.getWallet());
 
                             }
                         }
