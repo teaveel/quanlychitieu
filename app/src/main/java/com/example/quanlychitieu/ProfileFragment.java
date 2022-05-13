@@ -103,8 +103,13 @@ public class ProfileFragment extends Fragment {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         if (document.exists()) {
                             // convert document to POJO
-                            Outcome outcome = document.toObject(Outcome.class);
-                            listOutcome.add(outcome);
+                            User user = document.toObject(User.class);
+                            if(user.getEmail() == "")
+                            {
+                                txtUsername.setText(user.getUsername());
+                                txtUsername.setText(user.getUsername());
+
+                            }
                         }
                     }
                     Log.d("READ_DATA", list.toString());
