@@ -13,8 +13,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.*;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firestore.*;
 import java.util.*;
 import android.util.Log;
 import android.widget.TextView;
@@ -32,7 +30,7 @@ public class ProfileFragment extends Fragment {
 
     TextView txtIncome1,txtIncome2,txtIncome3, txtOutcome1,txtOutcome2,txtOutcome3;
     TextView numberIncome1,numberIncome2,numberIncome3, numberOutcome1,numberOutcome2,numberOutcome3;
-    TextView numberWallet;
+    TextView numberWallet, txtUsername;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -71,7 +69,7 @@ public class ProfileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
+        txtUsername = getView().findViewById(R.id.txtUsername);
         numberWallet = getView().findViewById(R.id.numberWallet);
         txtIncome1 = getView().findViewById(R.id.txtIncome1);
         txtIncome2 = getView().findViewById(R.id.txtIncome2);
@@ -85,7 +83,7 @@ public class ProfileFragment extends Fragment {
         numberOutcome1 = getView().findViewById(R.id.numberOutcome1);
         numberOutcome2 = getView().findViewById(R.id.numberOutcome2);
         numberOutcome3 = getView().findViewById(R.id.numberOutcome3);
-
+        init();
     }
 
     @Override
@@ -95,8 +93,26 @@ public class ProfileFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
-    private void getTopInOutCome()
+    private void init()
     {
+        db.collection("user").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<String> list = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if (document.exists()) {
+                            // convert document to POJO
+                            Outcome outcome = document.toObject(Outcome.class);
+                            listOutcome.add(outcome);
+                        }
+                    }
+                    Log.d("READ_DATA", list.toString());
+                } else {
+                    Log.d("READ_DATA", "Error getting documents: ", task.getException());
+                }
+            }
+        });
         db.collection("outcome").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {

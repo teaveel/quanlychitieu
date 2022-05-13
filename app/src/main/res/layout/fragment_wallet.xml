@@ -67,13 +67,6 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/poppins_bold"
                 />
-<!--            <DatePicker-->
-<!--                android:id="@+id/datePicker"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:datePickerMode="spinner"-->
-<!--                android:spinnersShown="false" />-->
 
         </LinearLayout>
         <LinearLayout
@@ -120,12 +113,17 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/poppins_bold"
                 />
+
             <EditText
+                android:id="@+id/inputNote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/bg_book_icon"
                 android:inputType="text"
                 android:maxLines="1"
+                android:hint="note"
+                android:textSize="24dp"
+                android:textAlignment="center"
                 />
         </LinearLayout>
         <LinearLayout
@@ -138,7 +136,6 @@
             android:orientation="vertical"
             >
             <TextView
-                android:id="@+id/inputNote"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
@@ -160,6 +157,7 @@
                 android:layout_marginEnd="20dp"
                 >
                 <Button
+                    android:contentDescription="C"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginEnd="40dp"
@@ -168,14 +166,17 @@
                     android:backgroundTint="@color/bg_food_icon"
                     android:drawableLeft="@drawable/icon_food" />
                 <Button
+                    android:contentDescription="C"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginEnd="40dp"
-                    :layout_centerHorizontal="true"
+                    android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:backgroundTint="@color/bg_car_icon"
                     android:drawableLeft="@drawable/icon_car" />
                 <Button
+                    android:contentDescription="C"
+
                     android:layout_marginEnd="40dp"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
@@ -184,6 +185,7 @@
                     android:backgroundTint="@color/bg_shop_icon"
                     android:drawableLeft="@drawable/icon_shopbag" />
                 <Button
+                    android:contentDescription="C"
                     android:layout_marginEnd="40dp"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
@@ -192,6 +194,7 @@
                     android:backgroundTint="@color/bg_gift_icon"
                     android:drawableLeft="@drawable/icon_gift" />
                 <Button
+                    android:contentDescription="C"
                     android:layout_marginEnd="30dp"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
@@ -200,6 +203,7 @@
                     android:backgroundTint="@color/bg_book_icon"
                     android:drawableLeft="@drawable/icon_book" />
                 <Button
+                    android:contentDescription="C"
                     android:layout_marginEnd="30dp"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
@@ -208,6 +212,7 @@
                     android:backgroundTint="@color/bg_heart_icon"
                     android:drawableLeft="@drawable/icon_heart" />
                 <Button
+                    android:contentDescription="C"
                     android:layout_marginEnd="30dp"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
@@ -216,6 +221,7 @@
                     android:backgroundTint="@color/bg_thunder_icon"
                     android:drawableLeft="@drawable/icon_bill" />
                 <Button
+                    android:contentDescription="C"
                     android:layout_marginEnd="30dp"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
@@ -223,79 +229,6 @@
                     android:layout_centerVertical="true"
                     android:backgroundTint="@color/bg_book_icon"
                     android:drawableLeft="@drawable/icon_diff" />
-
-<!--                <Button-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:backgroundTint="@color/bg_food_icon"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:fontFamily="@font/poppins_bold"-->
-<!--                    android:layout_marginEnd="30dp"-->
-<!--                    app:icon="@drawable/icon_food"-->
-<!--                    />-->
-<!--                <Button-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:backgroundTint="@color/bg_car_icon"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:fontFamily="@font/poppins_bold"-->
-<!--                    android:layout_marginEnd="30dp"-->
-<!--                    app:icon="@drawable/icon_car"-->
-<!--                    />-->
-<!--                <Button-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:backgroundTint="@color/bg_shop_icon"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:fontFamily="@font/poppins_bold"-->
-<!--                    android:layout_marginEnd="30dp"-->
-<!--                    app:icon="@drawable/icon_shopbag"-->
-<!--                    />-->
-<!--                <Button-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:backgroundTint="@color/bg_gift_icon"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:fontFamily="@font/poppins_bold"-->
-<!--                    android:layout_marginEnd="30dp"-->
-<!--                    app:icon="@drawable/icon_gift"-->
-<!--                    />-->
-<!--                <Button-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:backgroundTint="@color/bg_book_icon"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:fontFamily="@font/poppins_bold"-->
-<!--                    android:layout_marginEnd="30dp"-->
-<!--                    app:icon="@drawable/icon_book"-->
-<!--                    />-->
-<!--                <Button-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:backgroundTint="@color/bg_heart_icon"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:fontFamily="@font/poppins_bold"-->
-<!--                    android:layout_marginEnd="30dp"-->
-<!--                    app:icon="@drawable/icon_heart"-->
-<!--                    />-->
-
-<!--                <Button-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginEnd="30dp"-->
-<!--                    android:backgroundTint="@color/bg_thunder_icon"-->
-<!--                    android:fontFamily="@font/poppins_bold"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    app:icon="@drawable/icon_bill" />-->
-
-<!--                <Button-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginEnd="30dp"-->
-<!--                    android:backgroundTint="@color/bg_search_icon"-->
-<!--                    android:fontFamily="@font/poppins_bold"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    app:icon="@drawable/icon_diff" />-->
 
             </GridLayout>
             <Button
@@ -310,47 +243,6 @@
                 android:textSize="24dp"
                 android:text="Xác nhận" />
         </LinearLayout>
-
-        <!--        <LinearLayout-->
-        <!--            android:orientation="vertical"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:gravity="center"-->
-        <!--            android:background="@drawable/border_black_bg_white"-->
-        <!--            android:paddingHorizontal="12dp"-->
-        <!--            android:paddingVertical="8dp"-->
-        <!--            >-->
-        <!--            <TextView-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:text="Loại"-->
-        <!--                android:textSize="28dp"-->
-        <!--                android:textColor="@color/black"-->
-        <!--                android:fontFamily="@font/poppins_bold"-->
-        <!--                />-->
-        <!--            <GridLayout-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="match_parent"-->
-        <!--                android:numColumns="3"-->
-        <!--                >-->
-        <!--                <TextView-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="match_parent"-->
-        <!--                    android:text="hah1a"-->
-        <!--                    />-->
-        <!--                <TextView-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="match_parent"-->
-        <!--                    android:text="haha"-->
-        <!--                    />-->
-        <!--                <TextView-->
-        <!--                    android:layout_width="match_parent"-->
-        <!--                    android:layout_height="match_parent"-->
-        <!--                    android:text="haha"-->
-        <!--                    />-->
-        <!--            </GridLayout>-->
-
-        <!--        </LinearLayout>-->
 
     </LinearLayout>
 </LinearLayout>

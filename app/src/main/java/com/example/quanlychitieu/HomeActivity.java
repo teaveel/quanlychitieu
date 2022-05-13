@@ -1,6 +1,5 @@
 package com.example.quanlychitieu;
 
-import java.io.*;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
 import android.os.Bundle;
@@ -22,6 +21,7 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
 //        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder()
 
     }
+    
     WalletFragment walletFragment = new WalletFragment();
     CalendarFragment calendarFragment = new CalendarFragment();
     ChartFragment chartFragment = new ChartFragment();
