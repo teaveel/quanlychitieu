@@ -1,6 +1,7 @@
 package com.example.quanlychitieu;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -27,7 +28,13 @@ import com.google.android.gms.tasks.*;
 import com.google.android.gms.tasks.Task;
 
 import android.util.Log;
-
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.os.Bundle;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import java.util.Calendar;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link WalletFragment#newInstance} factory method to
@@ -45,7 +52,6 @@ public class WalletFragment extends Fragment {
     private String mParam2;
 
     public WalletFragment() {
-        // Required empty public constructor
     }
 
     /**
@@ -66,8 +72,12 @@ public class WalletFragment extends Fragment {
         return fragment;
     }
 
-    EditText inputAmount, inputNote;
-    Button btnConfirm;
+    EditText inputAmount, inputNote, inputDate;
+    EditText inputAmountIncome, inputNoteIncome, inputDateIncome;
+    Button btnConfirm, btnConfirmIncome;
+    Button tabIncome, tabOutcome;
+    LinearLayout layoutIncome, layoutOutcome;
+    GridLayout gridItemOutcome, gridItemIncome;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,23 +85,61 @@ public class WalletFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        inputAmount = getView().findViewById(R.id.inputAmount);
-        inputAmount = getView().findViewById(R.id.inputNote);
-        btnConfirm = getView().findViewById(R.id.btnConfirm);
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        /**
+         * FIND VIEW BY ID
+         */
+
+        inputDate = getView().findViewById(R.id.inputDate);
+        inputAmount = getView().findViewById(R.id.inputAmount);
+        inputNote = getView().findViewById(R.id.inputNote);
+        btnConfirm = getView().findViewById(R.id.btnConfirm);
+
+        inputDateIncome = getView().findViewById(R.id.inputDateIncome);
+        inputAmountIncome = getView().findViewById(R.id.inputAmountIncome);
+        inputNoteIncome = getView().findViewById(R.id.inputNoteIncome);
+        btnConfirmIncome = getView().findViewById(R.id.btnConfirmIncome);
+
+        tabIncome = getView().findViewById(R.id.tabIncome);
+        tabOutcome = getView().findViewById(R.id.tabOutcome);
+
+        layoutIncome = getView().findViewById(R.id.layoutIncome);
+        layoutOutcome = getView().findViewById(R.id.layoutOutcome);
+
+        gridItemOutcome = getView().findViewById(R.id.gridItemOutcome);
+        gridItemIncome = getView().findViewById(R.id.gridItemIncome);
+
+        /**
+         * ADD EVENTS
+         */
+        tabIncome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layoutIncome.setEnabled(true);
+                layoutOutcome.setEnabled(false);
+//                tabIncome.setBackgroundColor(Color.);
+            }
+        });
+        tabOutcome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                layoutIncome.setEnabled(false);
+                layoutOutcome.setEnabled(true);
+            }
+        });
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
                     int amount = Integer.parseInt(inputAmount.getText().toString());
                     String note = inputAmount.getText().toString();
+                    String date = inputDate.getText().toString();
                     //TODO: SAVE DATA TO FIREBASE
                     Map<String, Object> newOutcome = new HashMap<>();
                     newOutcome.put("amount", amount);
                     newOutcome.put("type", 3);
-                    newOutcome.put("date", null);
+                    newOutcome.put("date", date);
                     newOutcome.put("note", note);
                     // Add a new document with a generated ID
                     db.collection("outcome")
@@ -99,13 +147,13 @@ public class WalletFragment extends Fragment {
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
-                                    Log.d("CHECK_ADD_OUTCOME", "DocumentSnapshot added with ID: " + documentReference.getId());
+                                    Log.d("ADD_OUTCOME", "DocumentSnapshot added with ID: " + documentReference.getId());
                                 }
                             })
                             .addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Log.w("CHECK_ADD_OUTCOME", "Error adding document", e);
+                                    Log.w("ADD_OUTCOME", "Error adding document", e);
                                 }
                             });
                 }
@@ -123,17 +171,11 @@ public class WalletFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_wallet, container, false);
     }
-//    private void setChildrenOnClickListener(AppCompatRadioButton child) {
-//        GridLayout parent = (GridLayout) child.getParent();
-//        final int childCount = parent.getChildCount();
-//        for (int i = 0; i < childCount; i++) {
-//            final View v = parent.getChildAt(i);
-//            if (v instanceof AppCompatRadioButton) {
-//                if (((RadioButton) v).isChecked()) {
-//                    activeRadioButton = (AppCompatRadioButton) v;
-//                }
-//                v.setOnClickListener(this);
-//            }
-//        }
-//    }
+    private void setChildrenOnClickListener(AppCompatRadioButton child) {
+        GridLayout parent = (GridLayout) child.getParent();
+        final int childCount = parent.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            
+        }
+    }
 }
