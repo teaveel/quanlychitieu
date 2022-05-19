@@ -99,10 +99,14 @@
                />
        </LinearLayout>
    </LinearLayout>
-
         <com.anychart.AnyChartView
-            android:id="@+id/any_chart_view"
+            android:id="@+id/chartIncome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
+    <com.anychart.AnyChartView
+        android:id="@+id/chartOutcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 </LinearLayout>

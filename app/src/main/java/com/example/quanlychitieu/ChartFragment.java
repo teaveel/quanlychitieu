@@ -2,16 +2,26 @@ package com.example.quanlychitieu;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
 import com.anychart.*;
 import com.anychart.chart.*;
 import com.anychart.charts.*;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.*;
 
 /**
@@ -21,6 +31,10 @@ import java.util.*;
  */
 public class ChartFragment extends Fragment {
 
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    List<Outcome> listOutcome = new ArrayList<>();
+    List<Income> listIncome = new ArrayList<>();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -60,17 +74,131 @@ public class ChartFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        Pie pie = AnyChart.pie();
+        Pie incomePie = AnyChart.pie();
+        Pie outcomePie = AnyChart.pie();
 
-        List<DataEntry> data = new ArrayList<>();
-        data.add(new ValueDataEntry("John", 10000));
-        data.add(new ValueDataEntry("Jake", 12000));
-        data.add(new ValueDataEntry("Peter", 18000));
+        List<DataEntry> incomeData = new ArrayList<>();
+        List<DataEntry> outcomeData = new ArrayList<>();
 
-        pie.data(data);
+        db.collection("outcome").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<String> list = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if (document.exists()) {
+                            // convert document to POJO
+                            Outcome outcome = document.toObject(Outcome.class);
+                            listOutcome.add(outcome);
+                        }
+                    }
+                    Log.d("READ_DATA", list.toString());
+                } else {
+                    Log.d("READ_DATA", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+        db.collection("income").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<String> list = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if (document.exists()) {
+                            // convert document to POJO
+                            Income income = document.toObject(Income.class);
+                            listIncome.add(income);
+                        }
+                    }
+                    Log.d("READ_DATA", list.toString());
+                } else {
+                    Log.d("READ_DATA", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+        Float[] typeIncome = new Float[9];
+        Float[] typeOutcome = new Float[9];
+        for(int i =0; i < typeIncome.length;i++)
+        {
+            typeIncome[i]=0f;
+            typeOutcome[i]=0f;
+        }
+        for(int i = 0; i < listIncome.size(); i++)
+        {
+            Income income = listIncome.get(i);
+            typeIncome[income.getType()] += income.getAmount();
+        }
+        for(int i = 0; i < listOutcome.size(); i++)
+        {
+            //TODO: PARSE STRING TO INCOME
+            Outcome outcome = listOutcome.get(i);
+            typeOutcome[outcome.getType()] += outcome.getAmount();
+        }
 
-        AnyChartView anyChartView = (AnyChartView) getView().findViewById(R.id.any_chart_view);
-        anyChartView.setChart(pie);
+        for(int i = 0; i < typeIncome.length; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    incomeData.add(new ValueDataEntry("Thức ăn", typeIncome[i]));
+                    break;
+                case 1:
+                    incomeData.add(new ValueDataEntry("Lương", typeIncome[i]));
+                    break;
+                case 2:
+                    incomeData.add(new ValueDataEntry("Làm thêm", typeIncome[i]));
+                    break;
+                case 3:
+                    incomeData.add(new ValueDataEntry("Quà", typeIncome[i]));
+                    break;
+                case 4:
+                    incomeData.add(new ValueDataEntry("Đầu tư", typeIncome[i]));
+                    break;
+                case 5:
+                    incomeData.add(new ValueDataEntry("Khác", typeIncome[i]));
+                    break;
+            }
+        }
+
+        for(int i = 0; i < typeOutcome.length; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    outcomeData.add(new ValueDataEntry("Thức ăn", typeOutcome[i]));
+                    break;
+                case 1:
+                    outcomeData.add(new ValueDataEntry("Grab", typeOutcome[i]));
+                    break;
+                case 2:
+                    outcomeData.add(new ValueDataEntry("Mua sắm", typeOutcome[i]));
+                    break;
+                case 3:
+                    outcomeData.add(new ValueDataEntry("Quà", typeOutcome[i]));
+                    break;
+                case 4:
+                    outcomeData.add(new ValueDataEntry("Giáo dục", typeOutcome[i]));
+                    break;
+                case 5:
+                    outcomeData.add(new ValueDataEntry("Y tế", typeOutcome[i]));
+                    break;
+                case 6:
+                    outcomeData.add(new ValueDataEntry("Hóa đơn", typeOutcome[i]));
+                    break;
+                case 7:
+                    outcomeData.add(new ValueDataEntry("Khác", typeOutcome[i]));
+                    break;
+            }
+        }
+
+        incomePie.data(incomeData);
+        outcomePie.data(outcomeData);
+
+        AnyChartView chartIncome = (AnyChartView) getView().findViewById(R.id.chartIncome);
+        chartIncome.setChart(incomePie);
+
+        AnyChartView chartOutcome = (AnyChartView) getView().findViewById(R.id.chartOutcome);
+        chartOutcome.setChart(outcomePie);
     }
 
     @Override

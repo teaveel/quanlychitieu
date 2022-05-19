@@ -7,12 +7,5 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/editTextDate2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date"
-        tools:layout_editor_absoluteX="33dp"
-        tools:layout_editor_absoluteY="160dp" />
+    <DatePicker
 </androidx.constraintlayout.widget.ConstraintLayout>

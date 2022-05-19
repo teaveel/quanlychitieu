@@ -78,6 +78,7 @@ public class WalletFragment extends Fragment {
     Button tabIncome, tabOutcome;
     LinearLayout layoutIncome, layoutOutcome;
     GridLayout gridItemOutcome, gridItemIncome;
+    int inputType;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -172,10 +173,13 @@ public class WalletFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_wallet, container, false);
     }
     private void setChildrenOnClickListener(AppCompatRadioButton child) {
-        GridLayout parent = (GridLayout) child.getParent();
-        final int childCount = parent.getChildCount();
-        for (int i = 0; i < childCount; i++) {
-            
+        for (int i = 0; i < gridItemIncome.getChildCount(); i++) {
+            gridItemIncome.getChildAt(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                    inputType =
+                }
+            });
         }
     }
 }

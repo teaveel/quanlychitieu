@@ -208,7 +208,7 @@ public class ProfileFragment extends Fragment {
                     tmpIn.setText("Quà");
                     break;
                 case 4:
-                    tmpIn.setText("Đầu");
+                    tmpIn.setText("Đầu tư");
                     break;
                 case 5:
                     tmpIn.setText("Khác");
