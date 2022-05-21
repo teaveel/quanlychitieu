@@ -3,26 +3,22 @@ package com.example.quanlychitieu;
 import java.time.*;
 public class Income
 {
-    private int id,type;
+    private int type;
     private float amount;
     private String note;
-    private String date;
+    private String email;
     public Income()
     {
 
     }
-    public Income(int id, int type, float amount, String note, String date)
+    public Income(String email, int type, float amount, String note)
     {
-        this.id = id;
+        this.email = email;
         this.type = type;
         this.amount = amount;
         this.note = note;
-        this.date = date;
     }
-    public int getId()
-    {
-        return id;
-    }
+    public String getEmail(){ return email;}
     public int getType()
     {
         return type;
@@ -34,9 +30,5 @@ public class Income
     public String getNote()
     {
         return note;
-    }
-    public String getDate()
-    {
-        return date;
     }
 }

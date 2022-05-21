@@ -61,10 +61,11 @@
                 />
             <TextView
                 android:id="@+id/numberWallet"
-                android:layout_marginStart="200dp"
-                android:layout_width="wrap_content"
+                android:layout_marginStart="100dp"
+                android:textAlignment="textEnd"
+                android:layout_width="190dp"
                 android:layout_height="match_parent"
-                android:text="600$"
+                android:text="60000$"
                 android:textSize="30dp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/poppins_bold"
@@ -94,10 +95,11 @@
                 android:layout_gravity="start"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginStart="10dp"
                 >
                 <ImageView
+                    android:id="@+id/iconIncome1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon_wallet"
@@ -108,32 +110,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Ví"
-                    android:textSize="30dp"
+                    android:textSize="24dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_bold"
                     android:layout_marginEnd="20dp"
                     />
                 <TextView
                     android:id="@+id/numberIncome1"
-                    android:layout_width="wrap_content"
+                    android:textAlignment="textEnd"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="600$"
-                    android:textSize="30dp"
+                    android:textSize="24dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_bold"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginStart="200dp"
                     />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="start"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginStart="10dp"
 
                 >
                 <ImageView
+                    android:id="@+id/iconIncome2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon_wallet"
@@ -144,18 +147,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Ví"
-                    android:textSize="30dp"
+                    android:textSize="24dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_bold"
                     android:layout_marginEnd="20dp"
                     />
                 <TextView
                     android:id="@+id/numberIncome2"
-                    android:layout_marginStart="200dp"
-                    android:layout_width="wrap_content"
+                    android:textAlignment="textEnd"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="600$"
-                    android:textSize="30dp"
+                    android:textSize="24dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_bold"
                     android:layout_marginEnd="20dp"
@@ -166,10 +169,11 @@
                 android:layout_gravity="start"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginStart="10dp"
                 >
                 <ImageView
+                    android:id="@+id/iconIncome3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon_wallet"
@@ -180,21 +184,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Ví"
-                    android:textSize="30dp"
+                    android:textSize="24dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_bold"
                     android:layout_marginEnd="20dp"
                     />
                 <TextView
                     android:id="@+id/numberIncome3"
-                    android:layout_width="wrap_content"
+                    android:textAlignment="textEnd"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="600$"
-                    android:textSize="30dp"
+                    android:textSize="24dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_bold"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginStart="200dp"
                     />
             </LinearLayout>
         </LinearLayout>
@@ -209,7 +213,7 @@
                 android:layout_gravity="start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Top thu nhập"
+                android:text="Top chi tiêu"
                 android:fontFamily="@font/poppins_bold"
                 android:textColor="@color/black"
                 android:textSize="20dp"
@@ -220,10 +224,11 @@
                 android:layout_gravity="start"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginStart="10dp"
                 >
                 <ImageView
+                    android:id="@+id/iconOutcome1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon_wallet"
@@ -234,32 +239,33 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Ví"
-                    android:textSize="30dp"
+                    android:textSize="24dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_bold"
                     android:layout_marginEnd="20dp"
                     />
                 <TextView
                     android:id="@+id/numberOutcome1"
-                    android:layout_width="wrap_content"
+                    android:textAlignment="textEnd"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="600$"
-                    android:textSize="30dp"
+                    android:textSize="24dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_bold"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginStart="200dp"
                     />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="start"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginStart="10dp"
 
                 >
                 <ImageView
+                    android:id="@+id/iconOutcome2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon_wallet"
@@ -270,18 +276,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Ví"
-                    android:textSize="30dp"
+                    android:textSize="24dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_bold"
                     android:layout_marginEnd="20dp"
                     />
                 <TextView
                     android:id="@+id/numberOutcome2"
-                    android:layout_marginStart="200dp"
-                    android:layout_width="wrap_content"
+                    android:textAlignment="textEnd"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="600$"
-                    android:textSize="30dp"
+                    android:textSize="24dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_bold"
                     android:layout_marginEnd="20dp"
@@ -292,10 +298,11 @@
                 android:layout_gravity="start"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="15dp"
                 android:layout_marginStart="10dp"
                 >
                 <ImageView
+                    android:id="@+id/iconOutcome3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon_wallet"
@@ -306,21 +313,21 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="Ví"
-                    android:textSize="30dp"
+                    android:textSize="24dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_bold"
                     android:layout_marginEnd="20dp"
                     />
                 <TextView
                     android:id="@+id/numberOutcome3"
-                    android:layout_width="wrap_content"
+                    android:textAlignment="textEnd"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="600$"
-                    android:textSize="30dp"
+                    android:textSize="24dp"
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_bold"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginStart="200dp"
                     />
             </LinearLayout>
         </LinearLayout>

@@ -27,12 +27,6 @@ public class SignUpActivity extends AppCompatActivity {
         btnAlreadyAcc = findViewById(R.id.alreadyAcc);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        if(firebaseAuth.getCurrentUser() != null)
-        {
-            //da dang nhap
-//            startActivity(new Intent(getApplicationContext()), MainActivity.class);
-//            finish();
-        }
 
 
         btnAlreadyAcc.setOnClickListener(new View.OnClickListener() {

@@ -5,17 +5,20 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.*;
 import java.util.*;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.ImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,6 +34,7 @@ public class ProfileFragment extends Fragment {
     TextView txtIncome1,txtIncome2,txtIncome3, txtOutcome1,txtOutcome2,txtOutcome3;
     TextView numberIncome1,numberIncome2,numberIncome3, numberOutcome1,numberOutcome2,numberOutcome3;
     TextView numberWallet, txtUsername;
+    ImageView iconIncome1, iconIncome2, iconIncome3, iconOutcome1, iconOutcome2, iconOutcome3;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -69,33 +73,49 @@ public class ProfileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        txtUsername = getView().findViewById(R.id.txtUsername);
-        numberWallet = getView().findViewById(R.id.numberWallet);
-        txtIncome1 = getView().findViewById(R.id.txtIncome1);
-        txtIncome2 = getView().findViewById(R.id.txtIncome2);
-        txtIncome3 = getView().findViewById(R.id.txtIncome3);
-        txtOutcome1 = getView().findViewById(R.id.txtOutcome1);
-        txtOutcome2 = getView().findViewById(R.id.txtOutcome2);
-        txtOutcome3 = getView().findViewById(R.id.txtOutcome3);
-        numberIncome1 = getView().findViewById(R.id.numberIncome1);
-        numberIncome2 = getView().findViewById(R.id.numberIncome2);
-        numberIncome3 = getView().findViewById(R.id.numberIncome3);
-        numberOutcome1 = getView().findViewById(R.id.numberOutcome1);
-        numberOutcome2 = getView().findViewById(R.id.numberOutcome2);
-        numberOutcome3 = getView().findViewById(R.id.numberOutcome3);
-        init();
-    }
 
+    }
+    private FirebaseAuth firebaseAuth;
+    FirebaseUser currentUser;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
+
+        View view =inflater.inflate(R.layout.fragment_profile, container, false);
+        txtUsername = view.findViewById(R.id.txtUsername);
+        numberWallet = view.findViewById(R.id.numberWallet);
+        txtIncome1 = view.findViewById(R.id.txtIncome1);
+        txtIncome2 = view.findViewById(R.id.txtIncome2);
+        txtIncome3 = view.findViewById(R.id.txtIncome3);
+        txtOutcome1 = view.findViewById(R.id.txtOutcome1);
+        txtOutcome2 = view.findViewById(R.id.txtOutcome2);
+        txtOutcome3 = view.findViewById(R.id.txtOutcome3);
+        numberIncome1 = view.findViewById(R.id.numberIncome1);
+        numberIncome2 = view.findViewById(R.id.numberIncome2);
+        numberIncome3 = view.findViewById(R.id.numberIncome3);
+        numberOutcome1 = view.findViewById(R.id.numberOutcome1);
+        numberOutcome2 = view.findViewById(R.id.numberOutcome2);
+        numberOutcome3 = view.findViewById(R.id.numberOutcome3);
+
+        iconIncome1= view.findViewById(R.id.iconIncome1);
+        iconIncome2= view.findViewById(R.id.iconIncome2);
+        iconIncome3= view.findViewById(R.id.iconIncome3);
+        iconOutcome1= view.findViewById(R.id.iconOutcome1);
+        iconOutcome2= view.findViewById(R.id.iconOutcome2);
+        iconOutcome3= view.findViewById(R.id.iconOutcome3);
+
+        init();
+        return view;
     }
 
     private void init()
     {
-        db.collection("user").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        listIncome.clear();
+        listOutcome.clear();
+        db.collection("income").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
@@ -103,16 +123,16 @@ public class ProfileFragment extends Fragment {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         if (document.exists()) {
                             // convert document to POJO
-                            User user = document.toObject(User.class);
-                            if(user.getEmail() == "")
+                            Income income = document.toObject(Income.class);
+                            if(income.getEmail().equals(currentUser.getEmail()))
                             {
-                                txtUsername.setText(user.getUsername());
-                                numberWallet.setText(""+user.getWallet());
-
+                                listIncome.add(income);
+//                                totalIncome += listIncome.get(i).getAmount();
                             }
                         }
                     }
                     Log.d("READ_DATA", list.toString());
+                    loadTopIncome();
                 } else {
                     Log.d("READ_DATA", "Error getting documents: ", task.getException());
                 }
@@ -125,27 +145,54 @@ public class ProfileFragment extends Fragment {
                     List<String> list = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         if (document.exists()) {
-                            // convert document to POJO
                             Outcome outcome = document.toObject(Outcome.class);
-                            listOutcome.add(outcome);
+                            if(outcome.getEmail().equals(currentUser.getEmail()))
+                            {
+                                listOutcome.add(outcome);
+//                                totalIncome += listIncome.get(i).getAmount();
+                            }
                         }
                     }
                     Log.d("READ_DATA", list.toString());
+                    loadTopOutcome();
                 } else {
                     Log.d("READ_DATA", "Error getting documents: ", task.getException());
                 }
             }
         });
-        db.collection("income").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        //LAY TEN CUA USER TUONG UNG VOI EMAIL
+        db.collection("user").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
                     List<String> list = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         if (document.exists()) {
-                            // convert document to POJO
-                            Income income = document.toObject(Income.class);
-                            listIncome.add(income);
+                            User user = document.toObject(User.class);
+
+                            if(currentUser.getEmail().equals(user.getEmail()))
+                            {
+                                txtUsername.setText(user.getName());
+//                                txtUsername.setText(listOutcome.size() + " " + listIncome.size());
+                                float totalIncome = 0f;
+                                float totalOutcome = 0f;
+                                for(int i = 0; i < listIncome.size(); i++)
+                                {
+//                                    if(listIncome.get(i).getEmail().equals(currentUser.getEmail()))
+//                                    {
+                                        totalIncome += listIncome.get(i).getAmount();
+//                                    }
+                                }
+                                for(int i = 0; i < listOutcome.size(); i++)
+                                {
+//                                    if(listOutcome.get(i).getEmail().equals(currentUser.getEmail()))
+//                                    {
+                                        totalOutcome += listOutcome.get(i).getAmount();
+//                                    }
+                                }
+                                numberWallet.setText((int)(totalIncome - totalOutcome)+"$");
+//                                numberWallet.setText((totalIncome + " - " + totalOutcome));
+                            }
                         }
                     }
                     Log.d("READ_DATA", list.toString());
@@ -154,110 +201,247 @@ public class ProfileFragment extends Fragment {
                 }
             }
         });
-        Float[] typeIncome = new Float[9];
-        Float[] typeOutcome = new Float[9];
-        for(int i =0; i < typeIncome.length;i++)
-        {
-            typeIncome[i]=0f;
-            typeOutcome[i]=0f;
-        }
-        for(int i = 0; i < listIncome.size(); i++)
-        {
-            Income income = listIncome.get(i);
-            typeIncome[income.getType()] += income.getAmount();
-        }
-        for(int i = 0; i < listOutcome.size(); i++)
-        {
-            //TODO: PARSE STRING TO INCOME
-            Outcome outcome = listOutcome.get(i);
-            typeOutcome[outcome.getType()] += outcome.getAmount();
-        }
-        int[] topIncome = new int[3];
-        int[] topOutcome = new int[3];
-//        Arrays.sort(typeIncome, Collections.reverseOrder());
-//        Arrays.sort(typeOutcome, Collections.reverseOrder());
-        //TODO: -> ADD TO TYPES ARRAY SUM OF ALL INCOME -> CHOOSE TOP 3
-        for(int i = 0; i < topIncome.length; i++)
-        {
-            TextView tmpIn = txtIncome1;
-            TextView numIn = numberIncome1;
-            if(i == 1)
-            {
-                tmpIn = txtIncome2;
-                numIn = numberIncome2;
-            }
-            if(i == 2)
-            {
-                tmpIn = txtIncome3;
-                numIn = numberIncome3;
-            }
-            numIn.setText(typeIncome[topIncome[i]].toString());
 
-            switch (topIncome[i])
-            {
-                case 0:
-                    tmpIn.setText("Thu nhập");
-                    break;
-                case 1:
-                    tmpIn.setText("Lương");
-                    break;
-                case 2:
-                    tmpIn.setText("Làm thêm");
-                    break;
-                case 3:
-                    tmpIn.setText("Quà");
-                    break;
-                case 4:
-                    tmpIn.setText("Đầu tư");
-                    break;
-                case 5:
-                    tmpIn.setText("Khác");
-                    break;
-            }
-        }
-        for(int i = 0; i < topOutcome.length; i++)
+    }
+    private void loadTopIncome()
+    {
+        Hashtable<Integer, Float> incomes = new Hashtable<Integer, Float>();
+        for(int i =0; i < listIncome.size(); i++)
         {
-            TextView tmpOut = txtIncome1;
-            TextView numOut = numberOutcome1;
-            if(i == 1)
+            if(!incomes.containsKey(listIncome.get(i).getType()))
             {
-                tmpOut = txtOutcome2;
-                numOut = numberOutcome2;
+                incomes.put(listIncome.get(i).getType(), listIncome.get(i).getAmount());
             }
-            if(i == 2)
+            else
             {
-                tmpOut = txtOutcome3;
-                numOut = numberOutcome3;
-            }
-            numOut.setText(typeIncome[topOutcome[i]].toString());
-
-            switch (topIncome[i])
-            {
-                case 0:
-                    tmpOut.setText("Thức ăn");
-                    break;
-                case 1:
-                    tmpOut.setText("Grab");
-                    break;
-                case 2:
-                    tmpOut.setText("Mua sắm");
-                    break;
-                case 3:
-                    tmpOut.setText("Quà");
-                    break;
-                case 4:
-                    tmpOut.setText("Giáo dục");
-                    break;
-                case 5:
-                    tmpOut.setText("Y tế");
-                    break;
-                case 6:
-                    tmpOut.setText("Hóa đơn");
-                    break;
-                case 7:
-                    tmpOut.setText("Khác");
-                    break;
+                incomes.put(listIncome.get(i).getType(), incomes.get(listIncome.get(i).getType()) + listIncome.get(i).getAmount());
             }
         }
+        Pair<Integer, Float> topIncome1 = new Pair<>(0, 0f);
+        Pair<Integer, Float> topIncome2 = new Pair<>(0, 0f);
+        Pair<Integer, Float> topIncome3= new Pair<>(0, 0f);
+        for(int key : incomes.keySet())
+        {
+            float val = incomes.get(key);
+            if(val >= topIncome1.second)
+            {
+                topIncome3 = topIncome2;
+                topIncome2 = topIncome1;
+                topIncome1 = new Pair<>(key, val);
+            }
+        }
+        numberIncome1.setText(Math.round(topIncome1.second) + "$");
+        numberIncome2.setText(Math.round(topIncome2.second) + "$");
+        numberIncome3.setText(Math.round(topIncome3.second) + "$");
+
+        switch (topIncome1.first)
+        {
+            case 0:
+                txtIncome1.setText("Thu nhập");
+                iconIncome1.setImageResource(R.drawable.icon_wallet);
+                break;
+            case 1:
+                txtIncome1.setText("Lương");
+                iconIncome1.setImageResource(R.drawable.icon_money);
+                break;
+            case 2:
+                txtIncome1.setText("Làm thêm");
+                iconIncome1.setImageResource(R.drawable.icon_database);
+
+                break;
+            case 3:
+                txtIncome1.setText("Quà");
+                iconIncome1.setImageResource(R.drawable.icon_gift);
+                break;
+            case 4:
+                txtIncome1.setText("Đầu tư");
+                iconIncome1.setImageResource(R.drawable.icon_coin);
+                break;
+            case 5:
+                txtIncome1.setText("Khác");
+                iconIncome1.setImageResource(R.drawable.icon_diff);
+                break;
+        }
+        switch (topIncome2.first)
+        {
+            case 0:
+                txtIncome2.setText("Thu nhập");
+                iconIncome2.setImageResource(R.drawable.icon_wallet);
+
+                break;
+            case 1:
+                txtIncome2.setText("Lương");
+                iconIncome2.setImageResource(R.drawable.icon_money);
+
+                break;
+            case 2:
+                txtIncome2.setText("Làm thêm");
+                iconIncome2.setImageResource(R.drawable.icon_database);
+
+                break;
+            case 3:
+                txtIncome2.setText("Quà");
+                iconIncome2.setImageResource(R.drawable.icon_gift);
+                break;
+            case 4:
+                txtIncome2.setText("Đầu tư");
+                iconIncome2.setImageResource(R.drawable.icon_coin);
+
+                break;
+            case 5:
+                txtIncome2.setText("Khác");
+                iconIncome2.setImageResource(R.drawable.icon_diff);
+
+                break;
+        }
+        switch (topIncome3.first)
+        {
+            case 0:
+                txtIncome3.setText("Thu nhập");
+                iconIncome3.setImageResource(R.drawable.icon_wallet);
+
+                break;
+            case 1:
+                txtIncome3.setText("Lương");
+                iconIncome3.setImageResource(R.drawable.icon_money);
+
+                break;
+            case 2:
+                txtIncome3.setText("Làm thêm");
+                iconIncome3.setImageResource(R.drawable.icon_database);
+
+                break;
+            case 3:
+                txtIncome3.setText("Quà");
+                iconIncome3.setImageResource(R.drawable.icon_gift);
+
+                break;
+            case 4:
+                txtIncome3.setText("Đầu tư");
+                iconIncome3.setImageResource(R.drawable.icon_coin);
+                break;
+            case 5:
+                txtIncome3.setText("Khác");
+                iconIncome3.setImageResource(R.drawable.icon_diff);
+
+                break;
+        }
+
+    }
+    private void loadTopOutcome()
+    {
+        Hashtable<Integer, Float> outcomes = new Hashtable<Integer, Float>();
+        for(int i =0; i < listOutcome.size(); i++)
+        {
+            if(!outcomes.containsKey(listOutcome.get(i).getType()))
+            {
+                outcomes.put(listOutcome.get(i).getType(), listOutcome.get(i).getAmount());
+            }
+            else
+            {
+                outcomes.put(listOutcome.get(i).getType(), outcomes.get(listOutcome.get(i).getType()) + listIncome.get(i).getAmount());
+            }
+        }
+        Pair<Integer, Float> topOutcome1 = new Pair<>(0, 0f);
+        Pair<Integer, Float> topOutcome2 = new Pair<>(0, 0f);
+        Pair<Integer, Float> topOutcome3= new Pair<>(0, 0f);
+        for(int key : outcomes.keySet())
+        {
+            float val = outcomes.get(key);
+            if(val >= topOutcome1.second)
+            {
+                topOutcome3 = topOutcome2;
+                topOutcome2 = topOutcome1;
+                topOutcome1 = new Pair<>(key, val);
+            }
+        }
+
+        numberOutcome1.setText(Math.round(topOutcome1.second) + "$");
+        numberOutcome2.setText(Math.round(topOutcome2.second) + "$");
+        numberOutcome3.setText(Math.round(topOutcome3.second) + "$");
+
+        switch (topOutcome1.first)
+        {
+            case 0:
+                txtOutcome1.setText("Thức ăn");
+                break;
+            case 1:
+                txtOutcome1.setText("Grab");
+                break;
+            case 2:
+                txtOutcome1.setText("Mua sắm");
+                break;
+            case 3:
+                txtOutcome1.setText("Quà");
+                break;
+            case 4:
+                txtOutcome1.setText("Giáo dục");
+                break;
+            case 5:
+                txtOutcome1.setText("Y tế");
+                break;
+            case 6:
+                txtOutcome1.setText("Hóa đơn");
+                break;
+            case 7:
+                txtOutcome1.setText("Khác");
+                break;
+
+        }
+        switch (topOutcome2.first)
+        {
+            case 0:
+                txtOutcome2.setText("Thức ăn");
+                break;
+            case 1:
+                txtOutcome2.setText("Grab");
+                break;
+            case 2:
+                txtOutcome2.setText("Mua sắm");
+                break;
+            case 3:
+                txtOutcome2.setText("Quà");
+                break;
+            case 4:
+                txtOutcome2.setText("Giáo dục");
+                break;
+            case 5:
+                txtOutcome2.setText("Y tế");
+                break;
+            case 6:
+                txtOutcome2.setText("Hóa đơn");
+                break;
+            case 7:
+                txtOutcome2.setText("Khác");
+                break;
+        }
+        switch (topOutcome3.first)
+        {
+            case 0:
+                txtOutcome3.setText("Thức ăn");
+                break;
+            case 1:
+                txtOutcome3.setText("Grab");
+                break;
+            case 2:
+                txtOutcome3.setText("Mua sắm");
+                break;
+            case 3:
+                txtOutcome3.setText("Quà");
+                break;
+            case 4:
+                txtOutcome3.setText("Giáo dục");
+                break;
+            case 5:
+                txtOutcome3.setText("Y tế");
+                break;
+            case 6:
+                txtOutcome3.setText("Hóa đơn");
+                break;
+            case 7:
+                txtOutcome3.setText("Khác");
+                break;
+        }
+
     }
 }

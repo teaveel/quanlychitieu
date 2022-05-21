@@ -1,22 +1,22 @@
 package com.example.quanlychitieu;
 
 public class User {
-    private String email, username;
+    private String email, name;
     private float wallet;
     public User(){}
-    public User(String email, String username, float wallet)
+    public User(String email, String name, float wallet)
     {
         this.email = email;
-        this.username = username;
+        this.name = name;
         this.wallet = wallet;
     }
     public String getEmail()
     {
         return email;
     }
-    public String getUsername()
+    public String getName()
     {
-        return username;
+        return name;
     }
     public float getWallet()
     {

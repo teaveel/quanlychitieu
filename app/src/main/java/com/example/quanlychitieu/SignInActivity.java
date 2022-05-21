@@ -22,12 +22,14 @@ public class SignInActivity extends AppCompatActivity {
     Button btnSignIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         btnSignIn = findViewById(R.id.btnSignIn);
         inputEmail = findViewById(R.id.inputEmail);
         inputPass = findViewById(R.id.inputPass);
-        firebaseAuth = FirebaseAuth.getInstance();
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,10 +53,7 @@ public class SignInActivity extends AppCompatActivity {
 //                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
                                     Toast.makeText(SignInActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
-//                                    updateUI(null);
                                 }
-
-                                // ...
                             }
                         });
             }
@@ -69,6 +68,10 @@ public class SignInActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+//        if(currentUser)
+//        {
+//
+//        }
 //        updateUI(currentUser);
     }
     public void updateUi(FirebaseUser user)
