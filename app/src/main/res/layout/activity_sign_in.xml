@@ -7,14 +7,15 @@
     android:layout_marginHorizontal="32px"
     android:layout_marginTop="64px"
     tools:context=".SignInActivity">
+
     <EditText
         android:id="@+id/inputEmail"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="36px"
         android:background="@drawable/border"
         android:fontFamily="@font/baloo"
-        android:layout_marginBottom="36px"
         android:hint="Email" />
 
     <EditText

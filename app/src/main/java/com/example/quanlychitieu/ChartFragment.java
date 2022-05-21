@@ -11,11 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.anychart.*;
-import com.anychart.chart.*;
-import com.anychart.charts.*;
+import com.anychart.AnyChart;
+import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
+import com.anychart.chart.common.listener.Event;
+import com.anychart.chart.common.listener.ListenersInterface;
+import com.anychart.charts.Pie;
+import com.anychart.enums.Align;
+import com.anychart.enums.LegendLayout;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -73,7 +78,13 @@ public class ChartFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_chart, container, false);
         Pie incomePie = AnyChart.pie();
         Pie outcomePie = AnyChart.pie();
 
@@ -98,36 +109,39 @@ public class ChartFragment extends Fragment {
                 }
             }
         });
-        db.collection("income").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    List<String> list = new ArrayList<>();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (document.exists()) {
-                            // convert document to POJO
-                            Income income = document.toObject(Income.class);
-                            listIncome.add(income);
-                        }
-                    }
-                    Log.d("READ_DATA", list.toString());
-                } else {
-                    Log.d("READ_DATA", "Error getting documents: ", task.getException());
-                }
-            }
-        });
-        Float[] typeIncome = new Float[9];
+//        db.collection("income").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    List<String> list = new ArrayList<>();
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        if (document.exists()) {
+//                            // convert document to POJO
+//                            Income income = document.toObject(Income.class);
+//                            listIncome.add(income);
+//                        }
+//                    }
+//                    Log.d("READ_DATA", list.toString());
+//                } else {
+//                    Log.d("READ_DATA", "Error getting documents: ", task.getException());
+//                }
+//            }
+//        });
+//        Float[] typeIncome = new Float[8];
         Float[] typeOutcome = new Float[9];
-        for(int i =0; i < typeIncome.length;i++)
+//        for(int i =0; i < typeIncome.length;i++)
+//        {
+//            typeIncome[i]=0f;
+//        }
+        for(int i =0; i < typeOutcome.length;i++)
         {
-            typeIncome[i]=0f;
             typeOutcome[i]=0f;
         }
-        for(int i = 0; i < listIncome.size(); i++)
-        {
-            Income income = listIncome.get(i);
-            typeIncome[income.getType()] += income.getAmount();
-        }
+//        for(int i = 0; i < listIncome.size(); i++)
+//        {
+//            Income income = listIncome.get(i);
+//            typeIncome[income.getType()] += income.getAmount();
+//        }
         for(int i = 0; i < listOutcome.size(); i++)
         {
             //TODO: PARSE STRING TO INCOME
@@ -135,30 +149,30 @@ public class ChartFragment extends Fragment {
             typeOutcome[outcome.getType()] += outcome.getAmount();
         }
 
-        for(int i = 0; i < typeIncome.length; i++)
-        {
-            switch (i)
-            {
-                case 0:
-                    incomeData.add(new ValueDataEntry("Thức ăn", typeIncome[i]));
-                    break;
-                case 1:
-                    incomeData.add(new ValueDataEntry("Lương", typeIncome[i]));
-                    break;
-                case 2:
-                    incomeData.add(new ValueDataEntry("Làm thêm", typeIncome[i]));
-                    break;
-                case 3:
-                    incomeData.add(new ValueDataEntry("Quà", typeIncome[i]));
-                    break;
-                case 4:
-                    incomeData.add(new ValueDataEntry("Đầu tư", typeIncome[i]));
-                    break;
-                case 5:
-                    incomeData.add(new ValueDataEntry("Khác", typeIncome[i]));
-                    break;
-            }
-        }
+//        for(int i = 0; i < typeIncome.length; i++)
+//        {
+//            switch (i)
+//            {
+//                case 0:
+//                    incomeData.add(new ValueDataEntry("Thức ăn", typeIncome[i]));
+//                    break;
+//                case 1:
+//                    incomeData.add(new ValueDataEntry("Lương", typeIncome[i]));
+//                    break;
+//                case 2:
+//                    incomeData.add(new ValueDataEntry("Làm thêm", typeIncome[i]));
+//                    break;
+//                case 3:
+//                    incomeData.add(new ValueDataEntry("Quà", typeIncome[i]));
+//                    break;
+//                case 4:
+//                    incomeData.add(new ValueDataEntry("Đầu tư", typeIncome[i]));
+//                    break;
+//                case 5:
+//                    incomeData.add(new ValueDataEntry("Khác", typeIncome[i]));
+//                    break;
+//            }
+//        }
 
         for(int i = 0; i < typeOutcome.length; i++)
         {
@@ -194,17 +208,48 @@ public class ChartFragment extends Fragment {
         incomePie.data(incomeData);
         outcomePie.data(outcomeData);
 
-        AnyChartView chartIncome = (AnyChartView) getView().findViewById(R.id.chartIncome);
-        chartIncome.setChart(incomePie);
+//        AnyChartView chartIncome = (AnyChartView) view.findViewById(R.id.chartIncome);
+//        chartIncome.setChart(incomePie);
 
-        AnyChartView chartOutcome = (AnyChartView) getView().findViewById(R.id.chartOutcome);
+        AnyChartView chartOutcome = (AnyChartView) view.findViewById(R.id.chartOutcome);
         chartOutcome.setChart(outcomePie);
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chart, container, false);
+        AnyChartView anyChartView = view.findViewById(R.id.any_chart_view);
+        anyChartView.setProgressBar(view.findViewById(R.id.progress_bar));
+
+        Pie pie = AnyChart.pie();
+
+        pie.setOnClickListener(new ListenersInterface.OnClickListener(new String[]{"x", "value"}) {
+            @Override
+            public void onClick(Event event) {
+//                Toast.makeText(PieChartActivity.this, event.getData().get("x") + ":" + event.getData().get("value"), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        List<DataEntry> data = new ArrayList<>();
+        data.add(new ValueDataEntry("Apples", 6371664));
+        data.add(new ValueDataEntry("Pears", 789622));
+        data.add(new ValueDataEntry("Bananas", 7216301));
+        data.add(new ValueDataEntry("Grapes", 1486621));
+        data.add(new ValueDataEntry("Oranges", 1200000));
+
+        pie.data(data);
+
+        pie.title("Fruits imported in 2015 (in kg)");
+
+        pie.labels().position("outside");
+
+        pie.legend().title().enabled(true);
+        pie.legend().title()
+                .text("Retail channels")
+                .padding(0d, 0d, 10d, 0d);
+
+        pie.legend()
+                .position("center-bottom")
+                .itemsLayout(LegendLayout.HORIZONTAL)
+                .align(Align.CENTER);
+
+        anyChartView.setChart(pie);
+        return view;
     }
 }

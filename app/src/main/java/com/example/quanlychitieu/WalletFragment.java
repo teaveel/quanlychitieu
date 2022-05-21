@@ -52,6 +52,7 @@ public class WalletFragment extends Fragment {
     private String mParam2;
 
     public WalletFragment() {
+
     }
 
     /**
@@ -86,30 +87,39 @@ public class WalletFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_wallet, container, false);
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         /**
          * FIND VIEW BY ID
          */
 
-        inputDate = getView().findViewById(R.id.inputDate);
-        inputAmount = getView().findViewById(R.id.inputAmount);
-        inputNote = getView().findViewById(R.id.inputNote);
-        btnConfirm = getView().findViewById(R.id.btnConfirm);
+        inputDate = view.findViewById(R.id.inputDate);
+        inputAmount = view.findViewById(R.id.inputAmount);
+        inputNote = view.findViewById(R.id.inputNote);
+        btnConfirm = view.findViewById(R.id.btnConfirm);
 
-        inputDateIncome = getView().findViewById(R.id.inputDateIncome);
-        inputAmountIncome = getView().findViewById(R.id.inputAmountIncome);
-        inputNoteIncome = getView().findViewById(R.id.inputNoteIncome);
-        btnConfirmIncome = getView().findViewById(R.id.btnConfirmIncome);
+        inputDateIncome = view.findViewById(R.id.inputDateIncome);
+        inputAmountIncome = view.findViewById(R.id.inputAmountIncome);
+        inputNoteIncome = view.findViewById(R.id.inputNoteIncome);
+        btnConfirmIncome = view.findViewById(R.id.btnConfirmIncome);
 
-        tabIncome = getView().findViewById(R.id.tabIncome);
-        tabOutcome = getView().findViewById(R.id.tabOutcome);
+        tabIncome = view.findViewById(R.id.tabIncome);
+        tabOutcome = view.findViewById(R.id.tabOutcome);
 
-        layoutIncome = getView().findViewById(R.id.layoutIncome);
-        layoutOutcome = getView().findViewById(R.id.layoutOutcome);
+        layoutIncome = view.findViewById(R.id.layoutIncome);
+        layoutOutcome = view.findViewById(R.id.layoutOutcome);
 
-        gridItemOutcome = getView().findViewById(R.id.gridItemOutcome);
-        gridItemIncome = getView().findViewById(R.id.gridItemIncome);
+        gridItemOutcome = view.findViewById(R.id.gridItemOutcome);
+        gridItemIncome = view.findViewById(R.id.gridItemIncome);
 
         /**
          * ADD EVENTS
@@ -117,16 +127,22 @@ public class WalletFragment extends Fragment {
         tabIncome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                layoutIncome.setEnabled(true);
-                layoutOutcome.setEnabled(false);
+                Toast.makeText(getContext(), "hahahah.", Toast.LENGTH_SHORT).show();
+                tabIncome.setBackgroundColor(Color.parseColor("#1C8CC9"));
+
+                tabOutcome.setBackgroundColor(Color.parseColor("#B0BBC1"));
+                layoutOutcome.setVisibility(LinearLayout.INVISIBLE);
+                layoutIncome.setVisibility(LinearLayout.VISIBLE);
 //                tabIncome.setBackgroundColor(Color.);
             }
         });
         tabOutcome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                layoutIncome.setEnabled(false);
-                layoutOutcome.setEnabled(true);
+                tabOutcome.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                tabIncome.setBackgroundColor(Color.parseColor("#B0BBC1"));
+                layoutIncome.setVisibility(LinearLayout.INVISIBLE);
+                layoutOutcome.setVisibility(LinearLayout.VISIBLE);
             }
         });
         btnConfirm.setOnClickListener(new View.OnClickListener() {
@@ -164,13 +180,7 @@ public class WalletFragment extends Fragment {
                 }
             }
         });
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_wallet, container, false);
+        return view;
     }
     private void setChildrenOnClickListener(AppCompatRadioButton child) {
         for (int i = 0; i < gridItemIncome.getChildCount(); i++) {

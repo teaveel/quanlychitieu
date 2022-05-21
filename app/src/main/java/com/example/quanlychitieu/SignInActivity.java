@@ -18,20 +18,22 @@ import com.google.firebase.auth.*;
 
 public class SignInActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
+    TextView inputEmail, inputPass;
     Button btnSignIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         btnSignIn = findViewById(R.id.btnSignIn);
-
+        inputEmail = findViewById(R.id.inputEmail);
+        inputPass = findViewById(R.id.inputPass);
         firebaseAuth = FirebaseAuth.getInstance();
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = "";
-                String password = "";
+                String email = inputEmail.getText().toString();
+                String password = inputPass.getText().toString();
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
@@ -40,7 +42,7 @@ public class SignInActivity extends AppCompatActivity {
                                     // Sign in success, update UI with the signed-in user's information
 //                                    Log.d(TAG, "signInWithEmail:success");
                                     FirebaseUser user = firebaseAuth.getCurrentUser();
-                                    Toast.makeText(SignInActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignInActivity.this, "Authentication successfully.", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent();
                                     intent.setClass(SignInActivity.this, HomeActivity.class);
                                     startActivity(intent);
