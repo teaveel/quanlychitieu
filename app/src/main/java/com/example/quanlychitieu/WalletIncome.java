@@ -83,7 +83,9 @@ public class WalletIncome extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    EditText inputAmount, inputNote, inputDate;
+    Date inputDate;
+
+    EditText inputAmount, inputNote;
     EditText inputAmountIncome, inputNoteIncome;
     Button btnConfirm, btnConfirmIncome;
     public Button tabIncome, tabOutcome;
@@ -142,10 +144,11 @@ public class WalletIncome extends Fragment {
         currentUser = firebaseAuth.getCurrentUser();
         db = FirebaseFirestore.getInstance();
 
+        initDatePicker(view);
+
         findViews(view);
         addEvents(view);
 
-        initDatePicker();
 
     }
     private void findViews(View view)
@@ -210,7 +213,6 @@ public class WalletIncome extends Fragment {
                                     Log.d("ADD_INCOME", "DocumentSnapshot added with ID: " + documentReference.getId());
                                     Toast.makeText(view.getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                                     inputAmount.setText("");
-                                    inputDate.setText("");
                                     inputNote.setText("");
                                     inputTypeIncome = 0;
                                 }
@@ -289,7 +291,7 @@ public class WalletIncome extends Fragment {
         return makeDateString(day, month, year);
     }
 
-    private void initDatePicker()
+    private void initDatePicker(View _view)
     {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener()
         {
@@ -298,6 +300,11 @@ public class WalletIncome extends Fragment {
                 month = month + 1;
                 String date = makeDateString(dayOfMonth, month, year);
                 dateButton.setText(date);
+//                String date_string = "2";
+                //Instantiating the SimpleDateFormat class
+                SimpleDateFormat formatter = new SimpleDateFormat("MMMM dd yyyy");
+                //Parsing the given String to Date object
+                Date d = formatter.parse(date);
             }
         };
 
@@ -305,10 +312,13 @@ public class WalletIncome extends Fragment {
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
-        int style = 0;
-//        int style = AlertDialog.THEME_HOLO_LIGHT;
+        int style = 3;
 
-        datePickerDialog = new DatePickerDialog(getContext(), style, dateSetListener, year, month, day);
+        Calendar c = Calendar.getInstance();
+        c.set(year, month - 1, day, 0, 0);
+        Date test = c.getTime();
+
+        datePickerDialog = new DatePickerDialog(_view.getContext(), style, dateSetListener, year, month, day);
         //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
 
     }
