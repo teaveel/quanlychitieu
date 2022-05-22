@@ -153,12 +153,15 @@ public class ChartOutcome extends Fragment {
             Pie pie = AnyChart.pie();
 
             List<DataEntry> data = new ArrayList<>();
-            data.add(new ValueDataEntry("Thu nhập", 6371664));
-            data.add(new ValueDataEntry("Làm thêm", 789622));
-            data.add(new ValueDataEntry("Quà", 7216301));
-            data.add(new ValueDataEntry("Đầu tư", 1486621));
-            data.add(new ValueDataEntry("Khác", 1200000));
-            data.add(new ValueDataEntry("Hư", 1200000));
+            data.add(new ValueDataEntry("Thức ăn", 6371664));
+            data.add(new ValueDataEntry("Grab", 789622));
+            data.add(new ValueDataEntry("Mua Sắm", 7216301));
+            data.add(new ValueDataEntry("Quà", 1486621));
+            data.add(new ValueDataEntry("Giáo dục", 1200000));
+            data.add(new ValueDataEntry("Hóa đơn", 1200000));
+            data.add(new ValueDataEntry("Y tế", 134300));
+            data.add(new ValueDataEntry("Khác", 999553));
+
             pie.data(data);
 
             pie.labels().position("outside");
