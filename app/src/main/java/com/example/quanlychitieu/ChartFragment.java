@@ -60,8 +60,6 @@ public class ChartFragment extends Fragment {
     private FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
 
-    List<Outcome> listOutcome = new ArrayList<>();
-    List<Income> listIncome = new ArrayList<>();
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";

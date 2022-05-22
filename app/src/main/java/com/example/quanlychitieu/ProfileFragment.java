@@ -259,7 +259,7 @@ public class ProfileFragment extends Fragment {
         switch (topIncome1.first)
         {
             case 0:
-                txtIncome1.setText("Thu nhập");
+                txtIncome1.setText("Tiết kiệm");
                 iconIncome1.setImageResource(R.drawable.icon_wallet);
                 iconIncome1.setBackgroundColor(Color.parseColor("#1C8CC9"));
                 break;
@@ -298,7 +298,7 @@ public class ProfileFragment extends Fragment {
         switch (topIncome2.first)
         {
             case 0:
-                txtIncome2.setText("Thu nhập");
+                txtIncome2.setText("Tiết kiệm");
                 iconIncome2.setImageResource(R.drawable.icon_wallet);
                 iconIncome2.setBackgroundColor(Color.parseColor("#1C8CC9"));
 
@@ -339,7 +339,7 @@ public class ProfileFragment extends Fragment {
         switch (topIncome3.first)
         {
             case 0:
-                txtIncome3.setText("Thu nhập");
+                txtIncome3.setText("Tiết kiệm");
                 iconIncome3.setImageResource(R.drawable.icon_wallet);
                 iconIncome3.setBackgroundColor(Color.parseColor("#1C8CC9"));
 

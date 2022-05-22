@@ -29,15 +29,42 @@
         android:fontFamily="@font/baloo"
         android:hint="Password"
         android:inputType="textPassword" />
+
     <Button
         android:id="@+id/btnSignIn"
-        android:textAllCaps="false"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
+        android:layout_below="@+id/inputPass"
         android:backgroundTint="@color/red"
         android:fontFamily="@font/baloo"
-        android:layout_below="@+id/inputPass"
         android:text="Sign In"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textFontWeight="700"
+        android:textSize="24dp" />
+    <TextView
+        android:id="@+id/orTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnSignIn"
+        android:layout_marginBottom="36px"
+        android:fontFamily="@font/baloo"
+        android:textAlignment="center"
+        android:textSize="20dp"
+        android:text="Or" />
+
+    <Button
+        android:id="@+id/btnToSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/orTxt"
+        android:backgroundTint="@color/theme_purple"
+        android:fontFamily="@font/baloo"
+        android:text="Sign Up"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textFontWeight="700"
         android:textSize="24dp"
-        android:textColor="@color/white" />
+        android:textStyle="bold" />
+    />
 </RelativeLayout>

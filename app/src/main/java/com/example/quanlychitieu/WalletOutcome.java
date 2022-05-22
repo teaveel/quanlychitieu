@@ -174,14 +174,14 @@ public class WalletOutcome extends Fragment {
                     newOutcome.put("note", note);
                     newOutcome.put("email", currentUser.getEmail());
                     // Add a new document with a generated ID
-                    Toast.makeText(view.getContext(), "Add outcome successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     db.collection("outcome")
                             .add(newOutcome)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
                                     Log.d("ADD_OUTCOME", "DocumentSnapshot added with ID: " + documentReference.getId());
-                                    Toast.makeText(view.getContext(), "Add outcome successfully", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(view.getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                                     inputAmount.setText("");
                                     inputDate.setText("");
                                     inputNote.setText("");

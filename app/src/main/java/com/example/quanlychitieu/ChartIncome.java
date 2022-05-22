@@ -33,6 +33,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import androidx.fragment.app.Fragment;
@@ -58,7 +59,9 @@ import android.widget.Toast;
  * create an instance of this fragment.
  */
 public class ChartIncome extends Fragment {
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth firebaseAuth;
+    FirebaseUser currentUser;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -67,6 +70,7 @@ public class ChartIncome extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    List<Income> listIncome = new ArrayList<>();
 
     public ChartIncome() {
         // Required empty public constructor
@@ -108,106 +112,152 @@ public class ChartIncome extends Fragment {
         return view;
     }
     AnyChartView chartIncome;
+    TextView txtTest;
     private void findViews(View view)
     {
+        txtTest = view.findViewById(R.id.txtTest);
         chartIncome = view.findViewById(R.id.chartIncome);
         chartIncome.setProgressBar(view.findViewById(R.id.progress_bar));
     }
+    private boolean hasIncome = false;
     private void init(View view)
     {
-//        Pie incomePie = AnyChart.pie();
-//
-//        List<DataEntry> incomeData = new ArrayList<>();
-
-//        listIncome.clear();
-//        db.collection("income").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if (task.isSuccessful()) {
-//                    List<String> list = new ArrayList<>();
-//                    for (QueryDocumentSnapshot document : task.getResult()) {
-//                        if (document.exists()) {
-//                            // convert document to POJO
-//                            Income income = document.toObject(Income.class);
-//                            if(income.getEmail().equals(currentUser.getEmail()))
-//                            {
-//                                listIncome.add(income);
-//                            }
-//                        }
-//                    }
-//                    Log.d("READ_DATA", list.toString());
-//                } else {
-//                    Log.d("READ_DATA", "Error getting documents: ", task.getException());
-//                }
-//            }
-//        });
-//        Float[] typeIncome = new Float[6];
-//        for(int i =0; i < typeIncome.length;i++)
-//        {
-//            typeIncome[i]=0f;
-//        }
-//        for(int i = 0; i < listIncome.size(); i++)
-//        {
-//            Income income = listIncome.get(i);
-//            typeIncome[income.getType()] += income.getAmount();
-//        }
-
-//
-//        for(int i = 0; i < typeIncome.length; i++)
-//        {
-//            switch (i)
-//            {
-//                case 0:
-//                    incomeData.add(new ValueDataEntry("Thức ăn", typeIncome[i]));
-//                    break;
-//                case 1:
-//                    incomeData.add(new ValueDataEntry("Lương", typeIncome[i]));
-//                    break;
-//                case 2:
-//                    incomeData.add(new ValueDataEntry("Làm thêm", typeIncome[i]));
-//                    break;
-//                case 3:
-//                    incomeData.add(new ValueDataEntry("Quà", typeIncome[i]));
-//                    break;
-//                case 4:
-//                    incomeData.add(new ValueDataEntry("Đầu tư", typeIncome[i]));
-//                    break;
-//                case 5:
-//                    incomeData.add(new ValueDataEntry("Khác", typeIncome[i]));
-//                    break;
-//            }
-//        }
-
-//        incomePie.data(incomeData);
-
-//        AnyChartView chartIncome = (AnyChartView) view.findViewById(R.id.chartIncome);
-//        chartIncome.setChart(incomePie);
-
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
+        db = FirebaseFirestore.getInstance();
         findViews(view);
 
-        Pie pie = AnyChart.pie();
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("MMMM");
+        String strDate = formatter.format(date);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int currentMonth = cal.get(Calendar.MONTH);
 
-        List<DataEntry> data = new ArrayList<>();
-        data.add(new ValueDataEntry("Thu nhập", 6371664));
-        data.add(new ValueDataEntry("Làm thêm", 789622));
-        data.add(new ValueDataEntry("Quà", 7216301));
-        data.add(new ValueDataEntry("Đầu tư", 1486621));
-        data.add(new ValueDataEntry("Khác", 1200000));
-        data.add(new ValueDataEntry("Hư", 1200000));
-        pie.data(data);
+        Pie incomePie = AnyChart.pie();
+        List<DataEntry> incomeData = new ArrayList<>();
 
-        pie.labels().position("outside");
+        listIncome.clear();
+        db.collection("income").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<String> list = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if (document.exists()) {
+                            hasIncome = true;
+                            Income income = document.toObject(Income.class);
+//                            String email = document.getString(("email"));
+//                            float amount = (float)document.get("amount");
+//                            int type = (int)document.get("type");
+//                            String note = document.getString("note");
+//                            Income ic = new Income(email, type, amount, note);
 
-        pie.legend().title().enabled(true);
-        pie.legend().title()
-                .text("Thu nhập")
+                            Date dd = document.getDate("date");
+                            SimpleDateFormat formatter = new SimpleDateFormat("MMMM");
+                            String strDate = formatter.format(income.getDate());
+                            Calendar cal = Calendar.getInstance();
+                            cal.setTime(income.getDate());
+                            int month = cal.get(Calendar.MONTH);
+                            if(income.getEmail().equals(currentUser.getEmail()) && month == currentMonth)
+                            {
+                                listIncome.add(income);
+                            }
+                        }
+                    }
+                    Log.d("READ_DATA", list.toString());
+                } else {
+                    Log.d("READ_DATA", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+
+        if(listIncome.size() == 0)
+        {
+            Pie pie = AnyChart.pie();
+
+            List<DataEntry> data = new ArrayList<>();
+            data.add(new ValueDataEntry("Thu nhập", 6371664));
+            data.add(new ValueDataEntry("Làm thêm", 789622));
+            data.add(new ValueDataEntry("Quà", 7216301));
+            data.add(new ValueDataEntry("Đầu tư", 1486621));
+            data.add(new ValueDataEntry("Khác", 1200000));
+            data.add(new ValueDataEntry("Hư", 1200000));
+            pie.data(data);
+
+            pie.labels().position("outside");
+
+            pie.legend().title().enabled(true);
+            pie.legend().title()
+                    .text(listIncome.size() + " " + hasIncome)
+                    .padding(0d, 0d, 10d, 0d);
+
+            pie.legend()
+                    .position("center-bottom")
+                    .itemsLayout(LegendLayout.HORIZONTAL)
+                    .align(Align.CENTER);
+
+            chartIncome.setChart(pie);
+            return;
+        }
+
+        Float[] typeIncome = new Float[6];
+        for(int i =0; i < typeIncome.length;i++)
+        {
+            typeIncome[i]=0f;
+        }
+        for(int i = 0; i < listIncome.size(); i++)
+        {
+            Income income = listIncome.get(i);
+            typeIncome[income.getType()] += income.getAmount();
+        }
+
+
+        for(int i = 0; i < typeIncome.length; i++)
+        {
+            switch (i)
+            {
+                case 0:
+                    incomeData.add(new ValueDataEntry("Tiết kiệm", typeIncome[i]));
+                    break;
+                case 1:
+                    incomeData.add(new ValueDataEntry("Lương", typeIncome[i]));
+                    break;
+                case 2:
+                    incomeData.add(new ValueDataEntry("Làm thêm", typeIncome[i]));
+                    break;
+                case 3:
+                    incomeData.add(new ValueDataEntry("Quà", typeIncome[i]));
+                    break;
+                case 4:
+                    incomeData.add(new ValueDataEntry("Đầu tư", typeIncome[i]));
+                    break;
+                case 5:
+                    incomeData.add(new ValueDataEntry("Khác", typeIncome[i]));
+                    break;
+            }
+        }
+
+        incomePie.data(incomeData);
+
+        AnyChartView chartIncome = (AnyChartView) view.findViewById(R.id.chartIncome);
+        chartIncome.setChart(incomePie);
+
+        chartIncome.setChart(incomePie);
+
+        incomePie.labels().position("outside");
+
+        incomePie.legend().title().enabled(true);
+        incomePie.legend().title()
+                .text(listIncome.size() + " " + hasIncome)
                 .padding(0d, 0d, 10d, 0d);
 
-        pie.legend()
+        incomePie.legend()
                 .position("center-bottom")
                 .itemsLayout(LegendLayout.HORIZONTAL)
                 .align(Align.CENTER);
 
-        chartIncome.setChart(pie);
+
+
     }
 }

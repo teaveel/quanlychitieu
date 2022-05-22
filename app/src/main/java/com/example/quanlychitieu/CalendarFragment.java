@@ -35,7 +35,7 @@ import com.google.firebase.auth.FirebaseUser;
  * Use the {@link CalendarFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CalendarFragment extends Fragment {
+public class CalendarFragment extends Fragment implements CalendarAdapter.OnItemListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -116,71 +116,70 @@ public class CalendarFragment extends Fragment {
     private void findViews(View view)
     {
         calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView);
-        monthYearText = view.findViewById(R.id.monthYearTV);
+        monthYearText = view.findViewById(R.id.txtDate);
         btnPrevMonth= view.findViewById(R.id.btnPrevMonth);
         btnNextMonth= view.findViewById(R.id.btnNextMonth);
     }
 
     private void setMonthView()
     {
-//        monthYearText.setText(monthYearFromDate(selectedDate));
-//        ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
+        monthYearText.setText(monthYearFromDate(selectedDate));
+        ArrayList<String> daysInMonth = daysInMonthArray(selectedDate);
 
-//        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
-//        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 7);
-//        calendarRecyclerView.setLayoutManager(layoutManager);
-//        calendarRecyclerView.setAdapter(calendarAdapter);
+        CalendarAdapter calendarAdapter = new CalendarAdapter(daysInMonth, this);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 7);
+        calendarRecyclerView.setLayoutManager(layoutManager);
+        calendarRecyclerView.setAdapter(calendarAdapter);
     }
 
-//    private ArrayList<String> daysInMonthArray(LocalDate date)
-//    {
-//        ArrayList<String> daysInMonthArray = new ArrayList<>();
-//        YearMonth yearMonth = YearMonth.from(date);
-//
-//        int daysInMonth = yearMonth.lengthOfMonth();
-//
-//        LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
-//        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
-//
-//        for(int i = 1; i <= 42; i++)
-//        {
-//            if(i <= dayOfWeek || i > daysInMonth + dayOfWeek)
-//            {
-//                daysInMonthArray.add("");
-//            }
-//            else
-//            {
-//                daysInMonthArray.add(String.valueOf(i - dayOfWeek));
-//            }
-//        }
-//        return  daysInMonthArray;
-//    }
-//
-//    private String monthYearFromDate(LocalDate date)
-//    {
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
-//        return date.format(formatter);
-//    }
-//
-//    public void previousMonthAction(View view)
-//    {
-//        selectedDate = selectedDate.minusMonths(1);
-//        setMonthView();
-//    }
-//
-//    public void nextMonthAction(View view)
-//    {
-//        selectedDate = selectedDate.plusMonths(1);
-//        setMonthView();
-//    }
-//
-//    @Override
-//    public void onItemClick(int position, String dayText)
-//    {
-//        if(!dayText.equals(""))
-//        {
-//            String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
-//            Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-//        }
-//    }
+    private ArrayList<String> daysInMonthArray(LocalDate date)
+    {
+        ArrayList<String> daysInMonthArray = new ArrayList<>();
+        YearMonth yearMonth = YearMonth.from(date);
+
+        int daysInMonth = yearMonth.lengthOfMonth();
+
+        LocalDate firstOfMonth = selectedDate.withDayOfMonth(1);
+        int dayOfWeek = firstOfMonth.getDayOfWeek().getValue();
+
+        for(int i = 1; i <= 42; i++)
+        {
+            if(i <= dayOfWeek || i > daysInMonth + dayOfWeek)
+            {
+                daysInMonthArray.add("");
+            }
+            else
+            {
+                daysInMonthArray.add(String.valueOf(i - dayOfWeek));
+            }
+        }
+        return  daysInMonthArray;
+    }
+
+    private String monthYearFromDate(LocalDate date)
+    {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        return date.format(formatter);
+    }
+
+    public void previousMonthAction(View view)
+    {
+        selectedDate = selectedDate.minusMonths(1);
+        setMonthView();
+    }
+
+    public void nextMonthAction(View view)
+    {
+        selectedDate = selectedDate.plusMonths(1);
+        setMonthView();
+    }
+
+    @Override
+    public void onItemClick(int position, String dayText)
+    {
+        if(!dayText.equals(""))
+        {
+            String message = "Selected Date " + dayText + " " + monthYearFromDate(selectedDate);
+        }
+    }
 }

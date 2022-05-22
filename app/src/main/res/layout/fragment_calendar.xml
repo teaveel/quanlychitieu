@@ -12,39 +12,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp">
+        android:background="@color/bg_date_tilte"
+        >
         <Button
             android:id="@+id/btnPrevMonth"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="back"
-            android:textColor="@color/bg_car_icon"
-            android:background="@null"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
-
+            android:drawableLeft="@drawable/icon_prev"
+            android:backgroundTint="@color/bg_date_tilte"
+            />
         <TextView
-            android:id="@+id/monthYearTV"
+            android:id="@+id/txtDate"
             android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_weight="4"
             android:layout_height="wrap_content"
             android:text="Feb 2021"
-            android:textSize="20sp"
+            android:textSize="24sp"
+            android:fontFamily="@font/baloo"
             android:textAlignment="center"
             android:textColor="@color/black"/>
-
         <Button
             android:id="@+id/btnNextMonth"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="next"
-            android:textColor="@color/bg_car_icon"
-            android:background="@null"
-            android:textStyle="bold"
-            android:textSize="20sp"/>
+            android:drawableLeft="@drawable/icon_next"
+            android:backgroundTint="@color/bg_date_tilte"
+            />
 
     </LinearLayout>
 
@@ -58,6 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="SUN"
+            android:fontFamily="@font/baloo"
             android:textColor="@color/black"
             android:textAlignment="center"
             android:textSize="16sp"/>
@@ -67,6 +65,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="MON"
+            android:fontFamily="@font/baloo"
+
             android:textColor="@color/black"
             android:textAlignment="center"
             android:textSize="16sp"/>
@@ -76,6 +76,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="TUE"
+            android:fontFamily="@font/baloo"
+
             android:textColor="@color/black"
             android:textAlignment="center"
             android:textSize="16sp"/>
@@ -85,6 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="WED"
+            android:fontFamily="@font/baloo"
             android:textColor="@color/black"
             android:textAlignment="center"
             android:textSize="16sp"/>
@@ -94,6 +97,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="THUR"
+            android:fontFamily="@font/baloo"
+
             android:textColor="@color/black"
             android:textAlignment="center"
             android:textSize="16sp"/>
@@ -103,6 +108,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="FRI"
+            android:fontFamily="@font/baloo"
+
             android:textColor="@color/black"
             android:textAlignment="center"
             android:textSize="16sp"/>
@@ -112,6 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="SAT"
+            android:fontFamily="@font/baloo"
             android:textColor="@color/black"
             android:textAlignment="center"
             android:textSize="16sp"/>

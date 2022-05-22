@@ -185,14 +185,14 @@ public class WalletIncome extends Fragment {
 
 
                     // Add a new document with a generated ID
-                    Toast.makeText(view.getContext(), "Add outcome successfully", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     db.collection("income")
                             .add(newIncome)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
                                     Log.d("ADD_INCOME", "DocumentSnapshot added with ID: " + documentReference.getId());
-                                    Toast.makeText(view.getContext(), "Add outcome successfully", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(view.getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                                     inputAmount.setText("");
                                     inputDate.setText("");
                                     inputNote.setText("");

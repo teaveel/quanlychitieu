@@ -7,6 +7,13 @@
     tools:context=".ChartIncome">
 
     <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/txtTest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:text="test"
+        />
     <com.anychart.AnyChartView
         android:id="@+id/chartIncome"
         android:layout_width="match_parent"
