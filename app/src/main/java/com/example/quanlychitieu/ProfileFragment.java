@@ -17,6 +17,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.*;
+import java.time.*;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import android.util.Log;
 import android.widget.TextView;
@@ -39,6 +43,7 @@ public class ProfileFragment extends Fragment {
     TextView numberWallet, txtUsername;
     ImageView iconIncome1, iconIncome2, iconIncome3, iconOutcome1, iconOutcome2, iconOutcome3;
     Button btnLogout;
+    TextView testOutput;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -111,6 +116,8 @@ public class ProfileFragment extends Fragment {
         iconOutcome2= view.findViewById(R.id.iconOutcome2);
         iconOutcome3= view.findViewById(R.id.iconOutcome3);
         btnLogout = view.findViewById(R.id.btnLogout);
+
+        testOutput = view.findViewById(R.id.testOutput);
         init();
         return view;
     }
@@ -158,6 +165,8 @@ public class ProfileFragment extends Fragment {
                     List<String> list = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         if (document.exists()) {
+
+
                             Outcome outcome = document.toObject(Outcome.class);
                             if(outcome.getEmail().equals(currentUser.getEmail()))
                             {

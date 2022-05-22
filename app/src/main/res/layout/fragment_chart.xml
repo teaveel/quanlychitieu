@@ -112,24 +112,84 @@
 <!--        android:layout_height="120dp"-->
 <!--        android:textSize="36dp"-->
 <!--        android:text="test" />-->
-    <com.anychart.AnyChartView
-        android:id="@+id/chartIncome"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/bg_date_tilte"
+        >
+    <Button
+        android:id="@+id/btnPrevMonth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableLeft="@drawable/icon_prev"
+        android:backgroundTint="@color/bg_date_tilte"
         />
-    <com.anychart.AnyChartView
-        android:id="@+id/any_chart_view"
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="wrap_content"
+            android:text="Feb 2021"
+            android:textSize="24sp"
+            android:fontFamily="@font/baloo"
+            android:textAlignment="center"
+            android:textColor="@color/black"/>
+        <Button
+            android:id="@+id/btnNextMonth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/icon_next"
+            android:backgroundTint="@color/bg_date_tilte"
+            />
+
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        >
+        <LinearLayout
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_car_icon"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="6dp"
+            >
+
+            <Button
+                android:id="@+id/tabOutcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/blue_tab_active"
+                android:textColor="@color/white"
+                android:fontFamily="@font/poppins_bold"
+                android:layout_marginEnd="30dp"
+                android:text="Chi tiêu" />
+            <Button
+                android:id="@+id/tabIncome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/silver_tab_inactive"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@color/white"
+                android:text="Thu nhập" />
+        </LinearLayout>
+    </FrameLayout>
+    <LinearLayout
+        android:id="@+id/chartContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        />
+        android:orientation="vertical"
+        >
+    </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+
 </LinearLayout>

@@ -33,7 +33,7 @@ import com.google.firebase.firestore.*;
 
 import java.time.*;
 import java.util.*;
-
+import java.text.*;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.*;
@@ -156,6 +156,15 @@ public class WalletIncome extends Fragment {
         gIncomeItem6= view.findViewById(R.id.gIncomeItem6);
 
     }
+//    private static String getTimeDate(long timestamp){
+//        try{
+//            DateFormat dateFormat = getDateTimeInstance();
+//            Date netDate = (new Date(timestamp));
+//            return dateFormat.format(netDate);
+//        } catch(Exception e) {
+//            return "date";
+//        }
+//    }
     private void addEvents(View view)
     {
         setChildrenOnClickListener();
@@ -173,6 +182,8 @@ public class WalletIncome extends Fragment {
                     newIncome.put("date", date);
                     newIncome.put("note", note);
                     newIncome.put("email", currentUser.getEmail());
+
+
                     // Add a new document with a generated ID
                     Toast.makeText(view.getContext(), "Add outcome successfully", Toast.LENGTH_SHORT).show();
                     db.collection("income")
