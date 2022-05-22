@@ -177,19 +177,19 @@ public class ChartIncome extends Fragment {
             Pie pie = AnyChart.pie();
 
             List<DataEntry> data = new ArrayList<>();
-            data.add(new ValueDataEntry("Thu nhập", 6371664));
-            data.add(new ValueDataEntry("Làm thêm", 789622));
-            data.add(new ValueDataEntry("Quà", 7216301));
-            data.add(new ValueDataEntry("Đầu tư", 1486621));
-            data.add(new ValueDataEntry("Khác", 1200000));
-            data.add(new ValueDataEntry("Hư", 1200000));
+            data.add(new ValueDataEntry("Lương", 1323));
+            data.add(new ValueDataEntry("Làm thêm", 53));
+            data.add(new ValueDataEntry("Quà", 87));
+            data.add(new ValueDataEntry("Đầu tư", 1232));
+            data.add(new ValueDataEntry("Khác", 44));
+            data.add(new ValueDataEntry("Tiết kiệm", 1000));
             pie.data(data);
 
             pie.labels().position("outside");
 
             pie.legend().title().enabled(true);
             pie.legend().title()
-                    .text(listIncome.size() + " " + hasIncome)
+                    .text("Thu nhập")
                     .padding(0d, 0d, 10d, 0d);
 
             pie.legend()

@@ -84,7 +84,7 @@ public class WalletIncome extends Fragment {
     private String mParam2;
 
     EditText inputAmount, inputNote, inputDate;
-    EditText inputAmountIncome, inputNoteIncome, inputDateIncome;
+    EditText inputAmountIncome, inputNoteIncome;
     Button btnConfirm, btnConfirmIncome;
     public Button tabIncome, tabOutcome;
     LinearLayout layoutIncome, layoutOutcome;
@@ -150,7 +150,7 @@ public class WalletIncome extends Fragment {
     }
     private void findViews(View view)
     {
-        inputDateIncome = view.findViewById(R.id.inputDateIncome);
+//        inputDateIncome = view.findViewById(R.id.inputDateIncome);
         inputAmountIncome = view.findViewById(R.id.inputAmountIncome);
         inputNoteIncome = view.findViewById(R.id.inputNoteIncome);
         btnConfirmIncome = view.findViewById(R.id.btnConfirmIncome);
@@ -162,7 +162,7 @@ public class WalletIncome extends Fragment {
         gIncomeItem4= view.findViewById(R.id.gIncomeItem4);
         gIncomeItem5= view.findViewById(R.id.gIncomeItem5);
         gIncomeItem6= view.findViewById(R.id.gIncomeItem6);
-        dateButton = view.findViewById(R.id.datePickerButton);
+        dateButton = view.findViewById(R.id.inputDateIncome);
         dateButton.setText(getTodaysDate());
     }
 //    private static String getTimeDate(long timestamp){
@@ -190,7 +190,7 @@ public class WalletIncome extends Fragment {
                 try {
                     int amount = Integer.parseInt(inputAmountIncome.getText().toString());
                     String note = inputNoteIncome.getText().toString();
-                    String date = inputDateIncome.getText().toString();
+                    Date date = new Date();
                     //TODO: SAVE DATA TO FIREBASE
                     Map<String, Object> newIncome = new HashMap<>();
                     newIncome.put("amount", amount);

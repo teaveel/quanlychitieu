@@ -81,7 +81,7 @@ public class WalletOutcome extends Fragment {
     FirebaseFirestore db;
 
 
-    EditText inputAmount, inputNote, inputDate;
+    EditText inputAmount, inputNote;
     EditText inputAmountIncome, inputNoteIncome, inputDateIncome;
     Button btnConfirm, btnConfirmIncome;
     public Button tabIncome, tabOutcome;
@@ -142,7 +142,6 @@ public class WalletOutcome extends Fragment {
     private void findViews(View view)
     {
 
-        inputDate = view.findViewById(R.id.inputDate);
         inputAmount = view.findViewById(R.id.inputAmount);
         inputNote = view.findViewById(R.id.inputNote);
         btnConfirm = view.findViewById(R.id.btnConfirm);
@@ -165,7 +164,7 @@ public class WalletOutcome extends Fragment {
                 try {
                     int amount = Integer.parseInt(inputAmount.getText().toString());
                     String note = inputNote.getText().toString();
-                    String date = inputDate.getText().toString();
+                    Date date = new Date();
                     //TODO: SAVE DATA TO FIREBASE
                     Map<String, Object> newOutcome = new HashMap<>();
                     newOutcome.put("amount", amount);
@@ -174,7 +173,6 @@ public class WalletOutcome extends Fragment {
                     newOutcome.put("note", note);
                     newOutcome.put("email", currentUser.getEmail());
                     // Add a new document with a generated ID
-                    Toast.makeText(view.getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                     db.collection("outcome")
                             .add(newOutcome)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -183,7 +181,6 @@ public class WalletOutcome extends Fragment {
                                     Log.d("ADD_OUTCOME", "DocumentSnapshot added with ID: " + documentReference.getId());
                                     Toast.makeText(view.getContext(), "Thêm thành công", Toast.LENGTH_SHORT).show();
                                     inputAmount.setText("");
-                                    inputDate.setText("");
                                     inputNote.setText("");
                                     inputType = 0;
                                 }

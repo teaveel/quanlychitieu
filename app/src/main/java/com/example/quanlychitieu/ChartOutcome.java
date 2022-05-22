@@ -149,7 +149,6 @@ public class ChartOutcome extends Fragment {
         });
         if(listOutcome.size() == 0)
         {
-
             Pie pie = AnyChart.pie();
 
             List<DataEntry> data = new ArrayList<>();
@@ -177,6 +176,7 @@ public class ChartOutcome extends Fragment {
                     .align(Align.CENTER);
 
             chartOutcome.setChart(pie);
+            return;
         }
         Float[] typeIncome = new Float[6];
         for(int i =0; i < typeIncome.length;i++)

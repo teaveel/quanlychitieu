@@ -27,28 +27,32 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/poppins_bold"
                 />
-            <!--            <TextView-->
-            <!--                android:id="@+id/inputDate"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:text="01/01/2022"-->
-            <!--                android:textSize="24dp"-->
-            <!--                android:layout_marginLeft="36dp"-->
-            <!--                android:fontFamily="@font/poppins_bold"-->
-            <!--                android:gravity="center"-->
-            <!--                />-->
-            <EditText
+            <Button
                 android:id="@+id/inputDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/bg_book_icon"
-                android:inputType="date"
-                android:maxLines="1"
-                android:hint="01/01/2022"
+                android:text="JAN 01 2020"
                 android:textSize="20dp"
+                style="?android:spinnerStyle"
+                android:textColorHint="@color/bg_car_icon"
+                android:textColor="@color/black"
                 android:textAlignment="center"
-                android:layout_marginLeft="36dp"
+                android:drawableLeft="@drawable/icon_prev"
+                android:drawableRight="@drawable/icon_next"
+                android:fontFamily="@font/baloo"
                 />
+<!--            <EditText-->
+<!--                android:id="@+id/inputDate"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:backgroundTint="@color/bg_book_icon"-->
+<!--                android:inputType="date"-->
+<!--                android:maxLines="1"-->
+<!--                android:hint="01/01/2022"-->
+<!--                android:textSize="20dp"-->
+<!--                android:textAlignment="center"-->
+<!--                android:layout_marginLeft="36dp"-->
+<!--                />-->
 
         </LinearLayout>
         <LinearLayout

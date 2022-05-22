@@ -34,7 +34,6 @@ import android.widget.Button;
  */
 public class ProfileFragment extends Fragment {
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
     List<Outcome> listOutcome = new ArrayList<>();
     List<Income> listIncome = new ArrayList<>();
 
@@ -84,6 +83,8 @@ public class ProfileFragment extends Fragment {
         }
 
     }
+
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth;
     FirebaseUser currentUser;
     @Override
@@ -118,6 +119,7 @@ public class ProfileFragment extends Fragment {
         btnLogout = view.findViewById(R.id.btnLogout);
 
         testOutput = view.findViewById(R.id.testOutput);
+
         init();
         return view;
     }
@@ -142,12 +144,10 @@ public class ProfileFragment extends Fragment {
                     List<String> list = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         if (document.exists()) {
-                            // convert document to POJO
                             Income income = document.toObject(Income.class);
                             if(income.getEmail().equals(currentUser.getEmail()))
                             {
                                 listIncome.add(income);
-//                                totalIncome += listIncome.get(i).getAmount();
                             }
                         }
                     }
@@ -165,13 +165,10 @@ public class ProfileFragment extends Fragment {
                     List<String> list = new ArrayList<>();
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         if (document.exists()) {
-
-
                             Outcome outcome = document.toObject(Outcome.class);
                             if(outcome.getEmail().equals(currentUser.getEmail()))
                             {
                                 listOutcome.add(outcome);
-//                                totalIncome += listIncome.get(i).getAmount();
                             }
                         }
                     }
@@ -247,9 +244,23 @@ public class ProfileFragment extends Fragment {
             float val = incomes.get(key);
             if(val >= topIncome1.second)
             {
-                topIncome3 = topIncome2;
-                topIncome2 = topIncome1;
                 topIncome1 = new Pair<>(key, val);
+            }
+        }
+        for(int key : incomes.keySet())
+        {
+            float val = incomes.get(key);
+            if((val >= topIncome2.second) && (topIncome1.first != key))
+            {
+                topIncome2 = new Pair<>(key, val);
+            }
+        }
+        for(int key : incomes.keySet())
+        {
+            float val = incomes.get(key);
+            if((val >= topIncome3.second) && (topIncome1.first != key) &&(topIncome2.first != key))
+            {
+                topIncome3 = new Pair<>(key, val);
             }
         }
         numberIncome1.setText(Math.round(topIncome1.second) + "$");
@@ -261,37 +272,37 @@ public class ProfileFragment extends Fragment {
             case 0:
                 txtIncome1.setText("Tiết kiệm");
                 iconIncome1.setImageResource(R.drawable.icon_wallet);
-                iconIncome1.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome1.setBackgroundColor(Color.parseColor("#BCB7B8"));
                 break;
             case 1:
                 txtIncome1.setText("Lương");
                 iconIncome1.setImageResource(R.drawable.icon_money);
-                iconIncome1.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome1.setBackgroundColor(Color.parseColor("#CFFAEA"));
 
                 break;
             case 2:
                 txtIncome1.setText("Làm thêm");
                 iconIncome1.setImageResource(R.drawable.icon_database);
-                iconIncome1.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome1.setBackgroundColor(Color.parseColor("#C8D7D8"));
 
 
                 break;
             case 3:
                 txtIncome1.setText("Quà");
                 iconIncome1.setImageResource(R.drawable.icon_gift);
-                iconIncome1.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome1.setBackgroundColor(Color.parseColor("#E6FDD5"));
 
                 break;
             case 4:
                 txtIncome1.setText("Đầu tư");
                 iconIncome1.setImageResource(R.drawable.icon_coin);
-                iconIncome1.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome1.setBackgroundColor(Color.parseColor("#FC7F57"));
 
                 break;
             case 5:
                 txtIncome1.setText("Khác");
                 iconIncome1.setImageResource(R.drawable.icon_diff);
-                iconIncome1.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome1.setBackgroundColor(Color.parseColor("#DDD5FD"));
 
                 break;
         }
@@ -300,38 +311,38 @@ public class ProfileFragment extends Fragment {
             case 0:
                 txtIncome2.setText("Tiết kiệm");
                 iconIncome2.setImageResource(R.drawable.icon_wallet);
-                iconIncome2.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome2.setBackgroundColor(Color.parseColor("#BCB7B8"));
 
                 break;
             case 1:
                 txtIncome2.setText("Lương");
                 iconIncome2.setImageResource(R.drawable.icon_money);
-                iconIncome2.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome2.setBackgroundColor(Color.parseColor("#CFFAEA"));
 
                 break;
             case 2:
                 txtIncome2.setText("Làm thêm");
                 iconIncome2.setImageResource(R.drawable.icon_database);
-                iconIncome2.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome2.setBackgroundColor(Color.parseColor("#C8D7D8"));
 
                 break;
             case 3:
                 txtIncome2.setText("Quà");
                 iconIncome2.setImageResource(R.drawable.icon_gift);
-                iconIncome2.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome2.setBackgroundColor(Color.parseColor("#E6FDD5"));
 
                 break;
             case 4:
                 txtIncome2.setText("Đầu tư");
                 iconIncome2.setImageResource(R.drawable.icon_coin);
-                iconIncome2.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome2.setBackgroundColor(Color.parseColor("#FC7F57"));
 
 
                 break;
             case 5:
                 txtIncome2.setText("Khác");
                 iconIncome2.setImageResource(R.drawable.icon_diff);
-                iconIncome2.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome2.setBackgroundColor(Color.parseColor("#DDD5FD"));
 
 
                 break;
@@ -341,38 +352,38 @@ public class ProfileFragment extends Fragment {
             case 0:
                 txtIncome3.setText("Tiết kiệm");
                 iconIncome3.setImageResource(R.drawable.icon_wallet);
-                iconIncome3.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome3.setBackgroundColor(Color.parseColor("#BCB7B8"));
 
 
                 break;
             case 1:
                 txtIncome3.setText("Lương");
                 iconIncome3.setImageResource(R.drawable.icon_money);
-                iconIncome3.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome3.setBackgroundColor(Color.parseColor("#CFFAEA"));
 
                 break;
             case 2:
                 txtIncome3.setText("Làm thêm");
                 iconIncome3.setImageResource(R.drawable.icon_database);
-                iconIncome3.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome3.setBackgroundColor(Color.parseColor("#C8D7D8"));
 
                 break;
             case 3:
                 txtIncome3.setText("Quà");
                 iconIncome3.setImageResource(R.drawable.icon_gift);
-                iconIncome3.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome3.setBackgroundColor(Color.parseColor("#E6FDD5"));
 
                 break;
             case 4:
                 txtIncome3.setText("Đầu tư");
                 iconIncome3.setImageResource(R.drawable.icon_coin);
-                iconIncome1.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome1.setBackgroundColor(Color.parseColor("#FC7F57"));
 
                 break;
             case 5:
                 txtIncome3.setText("Khác");
                 iconIncome3.setImageResource(R.drawable.icon_diff);
-                iconIncome3.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconIncome3.setBackgroundColor(Color.parseColor("#DDD5FD"));
 
                 break;
         }
@@ -400,9 +411,23 @@ public class ProfileFragment extends Fragment {
             float val = outcomes.get(key);
             if(val >= topOutcome1.second)
             {
-                topOutcome3 = topOutcome2;
-                topOutcome2 = topOutcome1;
                 topOutcome1 = new Pair<>(key, val);
+            }
+        }
+        for(int key : outcomes.keySet())
+        {
+            float val = outcomes.get(key);
+            if((val >= topOutcome2.second) && (topOutcome1.first != key))
+            {
+                topOutcome2 = new Pair<>(key, val);
+            }
+        }
+        for(int key : outcomes.keySet())
+        {
+            float val = outcomes.get(key);
+            if((val >= topOutcome3.second) &&( topOutcome1.first != key) &&( topOutcome2.first != key))
+            {
+                topOutcome3 = new Pair<>(key, val);
             }
         }
 
@@ -415,49 +440,49 @@ public class ProfileFragment extends Fragment {
             case 0:
                 txtOutcome1.setText("Thức ăn");
                 iconOutcome1.setImageResource(R.drawable.icon_food);
-                iconOutcome1.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome1.setBackgroundColor(Color.parseColor("#FDD5D7"));
 
                 break;
             case 1:
                 txtOutcome1.setText("Grab");
                 iconOutcome1.setImageResource(R.drawable.icon_car);
-                iconOutcome1.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome1.setBackgroundColor(Color.parseColor("#BDDCFF"));
 
                 break;
             case 2:
                 txtOutcome1.setText("Mua sắm");
                 iconOutcome1.setImageResource(R.drawable.icon_shopbag);
-                iconOutcome1.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome1.setBackgroundColor(Color.parseColor("#FCEED4"));
 
                 break;
             case 3:
                 txtOutcome1.setText("Quà");
                 iconOutcome1.setImageResource(R.drawable.icon_gift);
-                iconOutcome1.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome1.setBackgroundColor(Color.parseColor("#E6FDD5"));
 
                 break;
             case 4:
                 txtOutcome1.setText("Giáo dục");
                 iconOutcome1.setImageResource(R.drawable.icon_book);
-                iconOutcome1.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome1.setBackgroundColor(Color.parseColor("#D6D6D6"));
 
                 break;
             case 5:
                 txtOutcome1.setText("Y tế");
                 iconOutcome1.setImageResource(R.drawable.icon_heart);
-                iconOutcome1.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome1.setBackgroundColor(Color.parseColor("#FC5757"));
 
                 break;
             case 6:
                 txtOutcome1.setText("Hóa đơn");
                 iconOutcome1.setImageResource(R.drawable.icon_bill);
-                iconOutcome1.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome1.setBackgroundColor(Color.parseColor("#FFD7"));
 
                 break;
             case 7:
                 txtOutcome1.setText("Khác");
                 iconOutcome1.setImageResource(R.drawable.icon_diff);
-                iconOutcome1.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome1.setBackgroundColor(Color.parseColor("#DDD5FD"));
 
                 break;
 
@@ -467,54 +492,54 @@ public class ProfileFragment extends Fragment {
             case 0:
                 txtOutcome2.setText("Thức ăn");
                 iconOutcome2.setImageResource(R.drawable.icon_food);
-                iconOutcome2.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome2.setBackgroundColor(Color.parseColor("#FDD5D7"));
 
                 break;
             case 1:
                 txtOutcome2.setText("Grab");
                 iconOutcome2.setImageResource(R.drawable.icon_car);
-                iconOutcome2.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome2.setBackgroundColor(Color.parseColor("#BDDCFF"));
 
                 break;
             case 2:
                 txtOutcome2.setText("Mua sắm");
                 iconOutcome2.setImageResource(R.drawable.icon_shopbag);
 
-                iconOutcome2.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome2.setBackgroundColor(Color.parseColor("#FCEED4"));
 
                 break;
             case 3:
                 txtOutcome2.setText("Quà");
                 iconOutcome2.setImageResource(R.drawable.icon_gift);
 
-                iconOutcome2.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome2.setBackgroundColor(Color.parseColor("#E6FDD5"));
 
                 break;
             case 4:
                 txtOutcome2.setText("Giáo dục");
                 iconOutcome2.setImageResource(R.drawable.icon_book);
 
-                iconOutcome2.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome2.setBackgroundColor(Color.parseColor("#D6D6D6"));
 
                 break;
             case 5:
                 txtOutcome2.setText("Y tế");
                 iconOutcome2.setImageResource(R.drawable.icon_heart);
 
-                iconOutcome2.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome2.setBackgroundColor(Color.parseColor("#FC5757"));
 
                 break;
             case 6:
                 txtOutcome2.setText("Hóa đơn");
                 iconOutcome2.setImageResource(R.drawable.icon_bill);
 
-                iconOutcome2.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome2.setBackgroundColor(Color.parseColor("#FFD7"));
 
                 break;
             case 7:
                 txtOutcome2.setText("Khác");
                 iconOutcome2.setImageResource(R.drawable.icon_diff);
-                iconOutcome2.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome2.setBackgroundColor(Color.parseColor("#DDD5FD"));
 
                 break;
         }
@@ -524,50 +549,50 @@ public class ProfileFragment extends Fragment {
                 txtOutcome3.setText("Thức ăn");
                 iconOutcome3.setImageResource(R.drawable.icon_food);
 
-                iconOutcome3.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome3.setBackgroundColor(Color.parseColor("#FDD5D7"));
 
                 break;
             case 1:
                 txtOutcome3.setText("Grab");
                 iconOutcome3.setImageResource(R.drawable.icon_car);
-                iconOutcome3.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome3.setBackgroundColor(Color.parseColor("#BDDCFF"));
 
                 break;
             case 2:
                 txtOutcome3.setText("Mua sắm");
                 iconOutcome3.setImageResource(R.drawable.icon_shopbag);
-                iconOutcome3.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome3.setBackgroundColor(Color.parseColor("#FCEED4"));
 
                 break;
             case 3:
                 txtOutcome3.setText("Quà");
                 iconOutcome3.setImageResource(R.drawable.icon_gift);
 
-                iconOutcome3.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome3.setBackgroundColor(Color.parseColor("#E6FDD5"));
 
                 break;
             case 4:
                 txtOutcome3.setText("Giáo dục");
                 iconOutcome3.setImageResource(R.drawable.icon_book);
-                iconOutcome3.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome3.setBackgroundColor(Color.parseColor("#D6D6D6"));
 
                 break;
             case 5:
                 txtOutcome3.setText("Y tế");
                 iconOutcome3.setImageResource(R.drawable.icon_heart);
-                iconOutcome3.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome3.setBackgroundColor(Color.parseColor("#FC5757"));
 
                 break;
             case 6:
                 txtOutcome3.setText("Hóa đơn");
                 iconOutcome3.setImageResource(R.drawable.icon_bill);
-                iconOutcome3.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome3.setBackgroundColor(Color.parseColor("#FFD7"));
 
                 break;
             case 7:
                 txtOutcome3.setText("Khác");
                 iconOutcome3.setImageResource(R.drawable.icon_diff);
-                iconOutcome3.setBackgroundColor(Color.parseColor("#1C8CC9"));
+                iconOutcome3.setBackgroundColor(Color.parseColor("#DDD5FD"));
 
                 break;
         }

@@ -31,7 +31,7 @@
                 android:fontFamily="@font/poppins_bold"
                 />
             <Button
-                android:id="@+id/datePickerButton"
+                android:id="@+id/inputDateIncome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="JAN 01 2020"
