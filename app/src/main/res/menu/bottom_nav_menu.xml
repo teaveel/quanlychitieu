@@ -3,17 +3,17 @@
     <item
         android:id="@+id/walletTab"
         android:title="Wallet"
-        android:icon="@drawable/wallet"/>
+        android:icon="@drawable/child_selector"/>
     <item
         android:id="@+id/calendarTab"
         android:title="Calendar"
-        android:icon="@drawable/calendar"/>
+        android:icon="@drawable/calendar_selector"/>
     <item
         android:id="@+id/chartTab"
         android:title="Chart"
-        android:icon="@drawable/pie_chart"/>
+        android:icon="@drawable/chart_selector"/>
     <item
         android:id="@+id/profileTab"
         android:title="Profile"
-        android:icon="@drawable/profile_active"/>
+        android:icon="@drawable/profile_selector"/>
 </menu>

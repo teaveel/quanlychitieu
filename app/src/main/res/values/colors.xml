@@ -21,7 +21,7 @@
     <color name="bg_gift_icon">#E6FDD5</color>
     <color name="bg_book_icon">#D6D6D6</color>
     <color name="bg_heart_icon">#FC5757</color>
-    <color name="bg_thunder_icon">#FFFDD7</color>
+    <color name="bg_thunder_icon">#FFD7</color>
     <color name="bg_search_icon">#DDD5FD</color>
 
     <color name="bg_wallet_icon">#BCB7B8</color>

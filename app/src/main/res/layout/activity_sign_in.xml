@@ -20,15 +20,15 @@
 
     <EditText
         android:id="@+id/inputPass"
-        android:inputType="numberPassword"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/border"
-        android:fontFamily="@font/baloo"
         android:layout_below="@+id/inputEmail"
         android:layout_marginBottom="36px"
-        android:hint="Password" />
+        android:background="@drawable/border"
+        android:fontFamily="@font/baloo"
+        android:hint="Password"
+        android:inputType="textPassword" />
     <Button
         android:id="@+id/btnSignIn"
         android:textAllCaps="false"

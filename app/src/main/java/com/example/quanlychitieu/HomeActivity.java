@@ -2,11 +2,13 @@ package com.example.quanlychitieu;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
+
+import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.quanlychitieu.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -34,6 +36,19 @@ public class HomeActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         setFragment(walletFragment);
 //        binding
+//        walletFragment.tabIncome.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                changeTab(new WalletIncome());
+//            }
+//        });
+//        walletFragment.tabIncome.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                changeTab(new WalletOutcome());
+//            }
+//        });
+        bottomNavigationView.setItemIconTintList(null);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.walletTab:

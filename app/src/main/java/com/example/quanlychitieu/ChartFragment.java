@@ -29,6 +29,20 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.*;
 
+import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
+
+import android.util.Pair;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.*;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ChartFragment#newInstance} factory method to
@@ -37,6 +51,8 @@ import java.util.*;
 public class ChartFragment extends Fragment {
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth firebaseAuth;
+    FirebaseUser currentUser;
 
     List<Outcome> listOutcome = new ArrayList<>();
     List<Income> listIncome = new ArrayList<>();
@@ -83,6 +99,8 @@ public class ChartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        currentUser = firebaseAuth.getCurrentUser();
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_chart, container, false);
         Pie incomePie = AnyChart.pie();
@@ -91,25 +109,7 @@ public class ChartFragment extends Fragment {
         List<DataEntry> incomeData = new ArrayList<>();
         List<DataEntry> outcomeData = new ArrayList<>();
 
-        db.collection("outcome").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    List<String> list = new ArrayList<>();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        if (document.exists()) {
-                            // convert document to POJO
-                            Outcome outcome = document.toObject(Outcome.class);
-                            listOutcome.add(outcome);
-                        }
-                    }
-                    Log.d("READ_DATA", list.toString());
-                } else {
-                    Log.d("READ_DATA", "Error getting documents: ", task.getException());
-                }
-            }
-        });
-//        db.collection("income").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//        db.collection("outcome").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 //            @Override
 //            public void onComplete(@NonNull Task<QuerySnapshot> task) {
 //                if (task.isSuccessful()) {
@@ -117,8 +117,8 @@ public class ChartFragment extends Fragment {
 //                    for (QueryDocumentSnapshot document : task.getResult()) {
 //                        if (document.exists()) {
 //                            // convert document to POJO
-//                            Income income = document.toObject(Income.class);
-//                            listIncome.add(income);
+//                            Outcome outcome = document.toObject(Outcome.class);
+//                            listOutcome.add(outcome);
 //                        }
 //                    }
 //                    Log.d("READ_DATA", list.toString());
@@ -127,92 +127,116 @@ public class ChartFragment extends Fragment {
 //                }
 //            }
 //        });
-//        Float[] typeIncome = new Float[8];
-        Float[] typeOutcome = new Float[9];
-//        for(int i =0; i < typeIncome.length;i++)
-//        {
-//            typeIncome[i]=0f;
-//        }
-        for(int i =0; i < typeOutcome.length;i++)
+        listIncome.clear();
+        listOutcome.clear();
+        db.collection("income").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<String> list = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        if (document.exists()) {
+                            // convert document to POJO
+                            Income income = document.toObject(Income.class);
+                            if(income.getEmail().equals(currentUser.getEmail()))
+                            {
+                                listIncome.add(income);
+                            }
+                        }
+                    }
+                    Log.d("READ_DATA", list.toString());
+                } else {
+                    Log.d("READ_DATA", "Error getting documents: ", task.getException());
+                }
+            }
+        });
+        Float[] typeIncome = new Float[6];
+//        Float[] typeOutcome = new Float[8];
+        for(int i =0; i < typeIncome.length;i++)
         {
-            typeOutcome[i]=0f;
+            typeIncome[i]=0f;
         }
-//        for(int i = 0; i < listIncome.size(); i++)
-//        {
-//            Income income = listIncome.get(i);
-//            typeIncome[income.getType()] += income.getAmount();
-//        }
-        for(int i = 0; i < listOutcome.size(); i++)
+        for(int i = 0; i < listIncome.size(); i++)
         {
-            //TODO: PARSE STRING TO INCOME
-            Outcome outcome = listOutcome.get(i);
-            typeOutcome[outcome.getType()] += outcome.getAmount();
+            Income income = listIncome.get(i);
+            typeIncome[income.getType()] += income.getAmount();
         }
-
-//        for(int i = 0; i < typeIncome.length; i++)
+//        for(int i =0; i < typeOutcome.length;i++)
 //        {
-//            switch (i)
-//            {
-//                case 0:
-//                    incomeData.add(new ValueDataEntry("Thức ăn", typeIncome[i]));
-//                    break;
-//                case 1:
-//                    incomeData.add(new ValueDataEntry("Lương", typeIncome[i]));
-//                    break;
-//                case 2:
-//                    incomeData.add(new ValueDataEntry("Làm thêm", typeIncome[i]));
-//                    break;
-//                case 3:
-//                    incomeData.add(new ValueDataEntry("Quà", typeIncome[i]));
-//                    break;
-//                case 4:
-//                    incomeData.add(new ValueDataEntry("Đầu tư", typeIncome[i]));
-//                    break;
-//                case 5:
-//                    incomeData.add(new ValueDataEntry("Khác", typeIncome[i]));
-//                    break;
-//            }
+//            typeOutcome[i]=0f;
 //        }
 
-        for(int i = 0; i < typeOutcome.length; i++)
+//        for(int i = 0; i < listOutcome.size(); i++)
+//        {
+//            //TODO: PARSE STRING TO INCOME
+//            Outcome outcome = listOutcome.get(i);
+//            typeOutcome[outcome.getType()] += outcome.getAmount();
+//        }
+
+        for(int i = 0; i < typeIncome.length; i++)
         {
             switch (i)
             {
                 case 0:
-                    outcomeData.add(new ValueDataEntry("Thức ăn", typeOutcome[i]));
+                    incomeData.add(new ValueDataEntry("Thức ăn", typeIncome[i]));
                     break;
                 case 1:
-                    outcomeData.add(new ValueDataEntry("Grab", typeOutcome[i]));
+                    incomeData.add(new ValueDataEntry("Lương", typeIncome[i]));
                     break;
                 case 2:
-                    outcomeData.add(new ValueDataEntry("Mua sắm", typeOutcome[i]));
+                    incomeData.add(new ValueDataEntry("Làm thêm", typeIncome[i]));
                     break;
                 case 3:
-                    outcomeData.add(new ValueDataEntry("Quà", typeOutcome[i]));
+                    incomeData.add(new ValueDataEntry("Quà", typeIncome[i]));
                     break;
                 case 4:
-                    outcomeData.add(new ValueDataEntry("Giáo dục", typeOutcome[i]));
+                    incomeData.add(new ValueDataEntry("Đầu tư", typeIncome[i]));
                     break;
                 case 5:
-                    outcomeData.add(new ValueDataEntry("Y tế", typeOutcome[i]));
-                    break;
-                case 6:
-                    outcomeData.add(new ValueDataEntry("Hóa đơn", typeOutcome[i]));
-                    break;
-                case 7:
-                    outcomeData.add(new ValueDataEntry("Khác", typeOutcome[i]));
+                    incomeData.add(new ValueDataEntry("Khác", typeIncome[i]));
                     break;
             }
         }
 
-        incomePie.data(incomeData);
-        outcomePie.data(outcomeData);
+//        for(int i = 0; i < typeOutcome.length; i++)
+//        {
+//            switch (i)
+//            {
+//                case 0:
+//                    outcomeData.add(new ValueDataEntry("Thức ăn", typeOutcome[i]));
+//                    break;
+//                case 1:
+//                    outcomeData.add(new ValueDataEntry("Grab", typeOutcome[i]));
+//                    break;
+//                case 2:
+//                    outcomeData.add(new ValueDataEntry("Mua sắm", typeOutcome[i]));
+//                    break;
+//                case 3:
+//                    outcomeData.add(new ValueDataEntry("Quà", typeOutcome[i]));
+//                    break;
+//                case 4:
+//                    outcomeData.add(new ValueDataEntry("Giáo dục", typeOutcome[i]));
+//                    break;
+//                case 5:
+//                    outcomeData.add(new ValueDataEntry("Y tế", typeOutcome[i]));
+//                    break;
+//                case 6:
+//                    outcomeData.add(new ValueDataEntry("Hóa đơn", typeOutcome[i]));
+//                    break;
+//                case 7:
+//                    outcomeData.add(new ValueDataEntry("Khác", typeOutcome[i]));
+//                    break;
+//            }
+//        }
+
+//        incomePie.data(incomeData);
+//        outcomePie.data(outcomeData);
 
 //        AnyChartView chartIncome = (AnyChartView) view.findViewById(R.id.chartIncome);
 //        chartIncome.setChart(incomePie);
 
-        AnyChartView chartOutcome = (AnyChartView) view.findViewById(R.id.chartOutcome);
-        chartOutcome.setChart(outcomePie);
+//        AnyChartView chartIncome = (AnyChartView) view.findViewById(R.id.chartIncome);
+//        chartIncome.setChart(outcomePie);
 
         AnyChartView anyChartView = view.findViewById(R.id.any_chart_view);
         anyChartView.setProgressBar(view.findViewById(R.id.progress_bar));
@@ -235,7 +259,7 @@ public class ChartFragment extends Fragment {
 
         pie.data(data);
 
-        pie.title("Fruits imported in 2015 (in kg)");
+        pie.title("haha");
 
         pie.labels().position("outside");
 
