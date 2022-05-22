@@ -64,6 +64,9 @@ import com.google.firebase.auth.*;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+
+import androidx.appcompat.app.AlertDialog;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link WalletIncome#newInstance} factory method to
@@ -89,6 +92,8 @@ public class WalletIncome extends Fragment {
     int inputType, inputTypeIncome;
     Button gIncomeItem1,gIncomeItem2,gIncomeItem3,gIncomeItem4,gIncomeItem5,gIncomeItem6;
 
+    private DatePickerDialog datePickerDialog;
+    private Button dateButton;
     public WalletIncome() {
         // Required empty public constructor
     }
@@ -139,6 +144,9 @@ public class WalletIncome extends Fragment {
 
         findViews(view);
         addEvents(view);
+
+        initDatePicker();
+
     }
     private void findViews(View view)
     {
@@ -154,7 +162,8 @@ public class WalletIncome extends Fragment {
         gIncomeItem4= view.findViewById(R.id.gIncomeItem4);
         gIncomeItem5= view.findViewById(R.id.gIncomeItem5);
         gIncomeItem6= view.findViewById(R.id.gIncomeItem6);
-
+        dateButton = view.findViewById(R.id.datePickerButton);
+        dateButton.setText(getTodaysDate());
     }
 //    private static String getTimeDate(long timestamp){
 //        try{
@@ -167,6 +176,13 @@ public class WalletIncome extends Fragment {
 //    }
     private void addEvents(View view)
     {
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDatePicker(view);
+            }
+        });
+
         setChildrenOnClickListener();
         btnConfirmIncome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -259,5 +275,82 @@ public class WalletIncome extends Fragment {
                 inputTypeIncome = 5;
             }
         });
+    }
+
+
+
+    private String getTodaysDate()
+    {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month = month + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        return makeDateString(day, month, year);
+    }
+
+    private void initDatePicker()
+    {
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener()
+        {
+            @Override
+            public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
+                String date = makeDateString(dayOfMonth, month, year);
+                dateButton.setText(date);
+            }
+        };
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int style = 0;
+//        int style = AlertDialog.THEME_HOLO_LIGHT;
+
+        datePickerDialog = new DatePickerDialog(getContext(), style, dateSetListener, year, month, day);
+        //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
+    }
+
+    private String makeDateString(int day, int month, int year)
+    {
+        return getMonthFormat(month) + " " + day + " " + year;
+    }
+
+    private String getMonthFormat(int month)
+    {
+        if(month == 1)
+            return "JAN";
+        if(month == 2)
+            return "FEB";
+        if(month == 3)
+            return "MAR";
+        if(month == 4)
+            return "APR";
+        if(month == 5)
+            return "MAY";
+        if(month == 6)
+            return "JUN";
+        if(month == 7)
+            return "JUL";
+        if(month == 8)
+            return "AUG";
+        if(month == 9)
+            return "SEP";
+        if(month == 10)
+            return "OCT";
+        if(month == 11)
+            return "NOV";
+        if(month == 12)
+            return "DEC";
+
+        //default should never happen
+        return "JAN";
+    }
+
+    public void openDatePicker(View view)
+    {
+        datePickerDialog.show();
     }
 }

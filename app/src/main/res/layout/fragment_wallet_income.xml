@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,18 +30,32 @@
                 android:textColor="@color/black"
                 android:fontFamily="@font/poppins_bold"
                 />
-            <EditText
-                android:id="@+id/inputDateIncome"
+            <Button
+                android:id="@+id/datePickerButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="@color/bg_book_icon"
-                android:inputType="date"
-                android:maxLines="1"
-                android:hint="01/01/2022"
+                android:text="JAN 01 2020"
                 android:textSize="20dp"
+                style="?android:spinnerStyle"
+                android:textColorHint="@color/bg_car_icon"
+                android:textColor="@color/black"
                 android:textAlignment="center"
-                android:layout_marginLeft="36dp"
-                />
+                android:drawableLeft="@drawable/icon_prev"
+                android:drawableRight="@drawable/icon_next"
+                android:fontFamily="@font/baloo"
+              />
+<!--            <EditText-->
+<!--                android:id="@+id/inputDateIncome"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:backgroundTint="@color/bg_book_icon"-->
+<!--                android:inputType="date"-->
+<!--                android:maxLines="1"-->
+<!--                android:hint="01/01/2022"-->
+<!--                android:textSize="20dp"-->
+<!--                android:textAlignment="center"-->
+<!--                android:layout_marginLeft="36dp"-->
+<!--                />-->
 
         </LinearLayout>
         <LinearLayout
@@ -146,6 +162,7 @@
                         android:layout_marginEnd="40dp"
                         android:layout_centerHorizontal="true"
                         android:layout_centerVertical="true"
+
                         android:backgroundTint="@color/bg_wallet_icon"
                         android:drawableLeft="@drawable/icon_wallet" />
                     <TextView
